@@ -1,0 +1,6 @@
+0,^ APROBAR ^ PARTE PRACTICA ^ NO PRESENTO UNA PRACTICA ^,*,*,Si mientras las notas de las demas se llege al 2.5,pregunta20.aiml
+0,^ APROBAR ^ PARTE PRACTICA ^ SIN PRESENTAR UNA PRACTICA ^,*,*,<srai>^ aprobar ^ parte practica ^ no presento una practica ^</srai>,pregunta20.aiml
+0,^ PARTE PRACTICA * APROBAR ^ SIN PRESENTAR UNA PRACTICA ^,*,*,<srai>^ aprobar ^ parte practica ^ no presento una practica ^</srai>,pregunta20.aiml
+0,^ PARTE PRACTICA ^ APROBAR * NO PRESENTO UNA PRACTICA ^,*,*,<srai>^ aprobar ^ parte practica ^ no presento una practica ^</srai>,pregunta20.aiml
+0,^ PARTE PRACTICA * APROBARLA ^ SIN PRESENTAR UNA PRACTICA ^,*,*,<srai>^ aprobar ^ parte practica ^ no presento una practica ^</srai>,pregunta20.aiml
+0,^ PARTE PRACTICA ^ APROBARLA * NO PRESENTO UNA PRACTICA ^,*,*,<srai>^ aprobar ^ parte practica ^ no presento una practica ^</srai>,pregunta20.aiml

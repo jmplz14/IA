@@ -1,0 +1,3 @@
+0,^ CONSIGUEN ^ PUNTOS * PARTICIPACION ^,*,*,Participando en las clases de forma activa,pregunta9.aiml
+0,^ OBTENER ^ PUNTOS * PARTICIPACION ^,*,*,<srai>^ consiguen ^ puntos * participacion ^</srai>,pregunta9.aiml
+0,^ PUNTOS * PARTICIPACION * CONSEGUIR ^,*,*,<srai>^ consiguen ^ puntos * participacion ^</srai>,pregunta9.aiml

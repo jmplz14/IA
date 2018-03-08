@@ -1,0 +1,6 @@
+color: verde amarillo
+tamano: pequeño
+sabor: acido
+vitaminaa: no
+vitaminab: no
+vitaminac: si

@@ -1,0 +1,4 @@
+0,^ TRABAJOS SON INDIVIDUALES ^,*,*,Los trabjos se haran de forma individual,pregunta10.aiml
+0,^ HACER INDIVIDUALMENTE * TRABAJOS ^,*,*,<srai>^ trabajos son individuales ^</srai>,pregunta10.aiml
+0,^ TRABAJOS * HACER INDIVIDUALMENTE ^,*,*,<srai>^ trabajos son individuales ^</srai>,pregunta10.aiml
+0,^ HACER ^ TRABAJOS ^ INDIVIDUALMENTE ^,*,*,<srai>^ trabajos son individuales ^</srai>,pregunta10.aiml

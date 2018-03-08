@@ -1,0 +1,47 @@
+<?xml version="1.0"
+encoding="UTF-8"?>
+<aiml version="2.0">
+
+<category>
+  <pattern>^ aprobar ^ parte practica ^ no presento una practica ^</pattern>
+  <template>
+    Si mientras las notas de las demas se llege al 2.5
+  </template>
+</category>
+
+<category>
+  <pattern>^ aprobar ^ parte practica ^ sin presentar una practica ^</pattern>
+  <template>
+    <srai>^ aprobar ^ parte practica ^ no presento una practica ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ parte practica * aprobar ^ sin presentar una practica ^</pattern>
+  <template>
+    <srai>^ aprobar ^ parte practica ^ no presento una practica ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ parte practica ^ aprobar * no presento una practica ^</pattern>
+  <template>
+    <srai>^ aprobar ^ parte practica ^ no presento una practica ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ parte practica * aprobarla ^ sin presentar una practica ^</pattern>
+  <template>
+    <srai>^ aprobar ^ parte practica ^ no presento una practica ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ parte practica ^ aprobarla * no presento una practica ^</pattern>
+  <template>
+    <srai>^ aprobar ^ parte practica ^ no presento una practica ^</srai>
+  </template>
+</category>
+
+</aiml>

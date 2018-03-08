@@ -1,0 +1,6 @@
+0,^ HORARIO DE TUTORIA ^ PROFESOR DE PRACTICAS ^,*,*,Consultero en la web direcotiro.ugr.es,pregunta19.aiml
+0,^ PROFESOR DE PRACTICAS ^ HORARIO DE TUTORIA ^,*,*,<srai>^ horario de tutoria ^ profesor de practicas ^</srai>,pregunta19.aiml
+0,^ PROFESOR DE PRACTICAS ^ IMPARTE TUTORIA ^,*,*,<srai>^ horario de tutoria ^ profesor de practicas ^</srai>,pregunta19.aiml
+0,^ IMPARTE TUTORIA ^ PROFESOR DE PRACTICAS ^,*,*,<srai>^ horario de tutoria ^ profesor de practicas ^</srai>,pregunta19.aiml
+0,^ PROFESOR DE PRACTICAS ^ IMPARTE TUTORIAS ^,*,*,<srai>^ horario de tutoria ^ profesor de practicas ^</srai>,pregunta19.aiml
+0,^ IMPARTE TUTORIAS ^ PROFESOR DE PRACTICAS ^,*,*,<srai>^ horario de tutoria ^ profesor de practicas ^</srai>,pregunta19.aiml

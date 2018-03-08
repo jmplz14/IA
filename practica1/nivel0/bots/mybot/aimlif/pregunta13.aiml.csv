@@ -1,0 +1,6 @@
+0,^ VALE * PRIMER EXAMEN * TEORIA ^,*,*,Cada parcial vale 0.66,pregunta13.aiml
+0,^ PRIMER EXAMEN * TEORIA * VALOR ^,*,*,<srai>^ vale * primer examen * teoria ^</srai>,pregunta13.aiml
+0,^ TEORIA * VALE * PRIMER EXAMEN ^,*,*,<srai>^ vale * primer examen * teoria ^</srai>,pregunta13.aiml
+0,^ VALE * PRIMER PARCIAL * TEORIA ^,*,*,Solo los pedidos por el profesor de teoria,pregunta13.aiml
+0,^ PRIMER PARCIAL * TEORIA * VALOR ^,*,*,<srai>^ vale * primer examen * teoria ^</srai>,pregunta13.aiml
+0,^ TEORIA * VALE * PRIMER PARCIAL ^,*,*,<srai>^ vale * primer examen * teoria ^</srai>,pregunta13.aiml

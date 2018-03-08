@@ -1,0 +1,6 @@
+color: naranja
+tamano: pequeño
+sabor: acido
+vitaminaa: si
+vitaminab: no
+vitaminac: no

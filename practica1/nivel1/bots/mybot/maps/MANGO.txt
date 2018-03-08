@@ -1,0 +1,6 @@
+color: verde
+tamano: grande
+sabor: semiacido
+vitaminaa: si
+vitaminab: si
+vitaminac: si

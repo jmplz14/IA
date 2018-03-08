@@ -1,0 +1,26 @@
+<?xml version="1.0"
+encoding="UTF-8"?>
+<aiml version="2.0">
+
+<category>
+  <pattern>^ entregar ^ relacion de problemas ^</pattern>
+  <template>
+    Solo los pedidos por el profesor de teoria
+  </template>
+</category>
+
+<category>
+  <pattern>^ relacion de problemas * obligatoria ^</pattern>
+  <template>
+    <srai>^ entregar ^ relacion de problemas ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ relacion de problemas * entregar ^</pattern>
+  <template>
+    <srai>^ entregar ^ relacion de problemas ^</srai>
+  </template>
+</category>
+
+</aiml>

@@ -1,0 +1,4 @@
+0,^ HACER ^ TRABAJOS EN GRUPO ^,*,*,No#Comma Los trabjos se haran de forma individual,pregunta11.aiml
+0,^ HACER EN GRUPO * TRABAJOS ^,*,*,<srai>^ hacer ^ trabajos en grupo ^</srai>,pregunta11.aiml
+0,^ TRABAJOS * HACER EN GRUPO ^,*,*,<srai>^ hacer ^ trabajos en grupo ^</srai>,pregunta11.aiml
+0,^ HACER ^ TRABAJOS * GRUPO ^,*,*,<srai>^ hacer ^ trabajos en grupo ^</srai>,pregunta11.aiml

@@ -1,0 +1,28 @@
+<?xml version="1.0"
+encoding="UTF-8"?>
+<aiml version="2.0">
+
+<category>
+  <pattern>^ encantan * agentes conversacionales ^ soy un experto * construccion * usar * agente conversacional * vaya * defensa de practicas ^</pattern>
+  <template>
+    Suspenderias seguroooo
+  </template>
+</category>
+
+<category>
+
+<category>
+    <pattern>^ usar * agente conversacional * vaya * defensa de practicas * encantan * agentes conversacionales ^ soy un experto * construccion  ^</pattern>
+  <template>
+    <srai>^ encantan * agentes conversacionales ^ soy un experto * construccion * usar * agente conversacional * vaya * defensa de practicas ^</srai>
+  </template>
+</category>
+
+<category>
+    <pattern>^ soy un experto * construccion * encantan * agentes conversacionales * usar * agente conversacional * vaya * defensa de practicas ^</pattern>
+  <template>
+    <srai>^ encantan * agentes conversacionales ^ soy un experto * construccion * usar * agente conversacional * vaya * defensa de practicas ^</srai>
+  </template>
+</category>
+
+</aiml>

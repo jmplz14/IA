@@ -1,0 +1,3 @@
+0,^ ENTREGAR ^ RELACION DE PROBLEMAS ^,*,*,Solo los pedidos por el profesor de teoria,pregunta12.aiml
+0,^ RELACION DE PROBLEMAS * OBLIGATORIA ^,*,*,<srai>^ entregar ^ relacion de problemas ^</srai>,pregunta12.aiml
+0,^ RELACION DE PROBLEMAS * ENTREGAR ^,*,*,<srai>^ entregar ^ relacion de problemas ^</srai>,pregunta12.aiml

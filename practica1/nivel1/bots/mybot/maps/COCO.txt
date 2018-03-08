@@ -1,0 +1,6 @@
+color: marron
+tamano: grande
+sabor: neutro
+vitaminaa: no
+vitaminab: si
+vitaminac: si

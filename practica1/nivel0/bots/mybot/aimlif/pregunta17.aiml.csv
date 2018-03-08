@@ -1,0 +1,4 @@
+0,^ SUSPENDO ^ CONVOCATORIA ORDIANARIA ^,*,*,En la convocatoria de septiembre habrá un examen escrito único (evaluado de 0 a 10) que incluirá preguntas#Newlinetanto de tipo teórico como práctico que garanticen que el alumno ha adquirido la totalidad de las competencias#Newlinedescritas en esta misma guía docente. No habrá entrega de prácticas en esta convocatoria.,pregunta17.aiml
+0,^ NO APRUEBO ^ CONVOCATORIA ORDIANARIA ^,*,*,<srai>^ suspendo ^ convocatoria ordianaria ^</srai>,pregunta17.aiml
+0,^ CONVOCATORIA ORDIANARIA ^ SUSPENDO ^,*,*,<srai>^ suspendo ^ convocatoria ordianaria ^</srai>,pregunta17.aiml
+0,^ CONVOCATORIA ORDIANARIA ^ SUSPENDES ^,*,*,<srai>^ suspendo ^ convocatoria ordianaria ^</srai>,pregunta17.aiml

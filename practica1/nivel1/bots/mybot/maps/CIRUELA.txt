@@ -1,0 +1,6 @@
+color: amarillo morado
+tamano: pequeño
+sabor: dulce
+vitaminaa: si
+vitaminab: si
+vitaminac: si

@@ -1,0 +1,47 @@
+<?xml version="1.0"
+encoding="UTF-8"?>
+<aiml version="2.0">
+
+<category>
+  <pattern>^ horario de tutoria ^ profesor de practicas ^</pattern>
+  <template>
+    Consultero en la web direcotiro.ugr.es
+  </template>
+</category>
+
+<category>
+  <pattern>^ profesor de practicas ^ horario de tutoria ^</pattern>
+  <template>
+    <srai>^ horario de tutoria ^ profesor de practicas ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ profesor de practicas ^ imparte tutoria ^</pattern>
+  <template>
+    <srai>^ horario de tutoria ^ profesor de practicas ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ imparte tutoria ^ profesor de practicas ^</pattern>
+  <template>
+    <srai>^ horario de tutoria ^ profesor de practicas ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ profesor de practicas ^ imparte tutorias ^</pattern>
+  <template>
+    <srai>^ horario de tutoria ^ profesor de practicas ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ imparte tutorias ^ profesor de practicas ^</pattern>
+  <template>
+    <srai>^ horario de tutoria ^ profesor de practicas ^</srai>
+  </template>
+</category>
+
+</aiml>

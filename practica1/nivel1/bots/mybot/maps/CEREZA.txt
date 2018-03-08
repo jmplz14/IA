@@ -1,0 +1,6 @@
+color: rojo
+tamano: pequeño
+sabor: semiacido
+vitaminaa: si
+vitaminab: no
+vitaminac: si

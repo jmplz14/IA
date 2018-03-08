@@ -1,0 +1,35 @@
+<?xml version="1.0"
+encoding="UTF-8"?>
+<aiml version="2.0">
+
+<category>
+  <pattern>^ consiste * examen de ejercicios ^</pattern>
+  <template>
+    La primera prueba teorica vale 0.66
+  </template>
+</category>
+
+<category>
+
+<category>
+    <pattern>^ examen de ejercicios * consiste *</pattern>
+  <template>
+    <srai>^ consiste * examen de ejercicios ^</srai>
+  </template>
+</category>
+
+<category>
+    <pattern>^ prueba de ejercicios * consiste *</pattern>
+  <template>
+    <srai>^ consiste * examen de ejercicios ^</srai>
+  </template>
+</category>
+
+<category>
+    <pattern>^ consiste * prueba de ejercicios ^</pattern>
+  <template>
+    <srai>^ consiste * examen de ejercicios ^</srai>
+  </template>
+</category>
+
+</aiml>

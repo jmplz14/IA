@@ -1,0 +1,4 @@
+0,^ RECUPERAR ^ PRACTICA O EXAMEN ^,*,*,No se pueden recuperar una practica o un examen por separado,pregunta14.aiml
+0,^ PRACTICA O EXAMEN ^ RECUPERAR ^,*,*,<srai>^ recuperar ^ practica o examen ^</srai>,pregunta14.aiml
+0,^ REPETIR ^ PRACTICA O EXAMEN ^,*,*,<srai>^ recuperar ^ practica o examen ^</srai>,pregunta14.aiml
+0,^ PRACTICA O EXAMEN ^ REPETIR ^,*,*,<srai>^ recuperar ^ practica o examen ^</srai>,pregunta14.aiml

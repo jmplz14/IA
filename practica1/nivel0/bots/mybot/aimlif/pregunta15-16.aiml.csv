@@ -1,0 +1,6 @@
+0,* COPIO * ESTUDIANTE ^,*,*,Si te pilla el profesor suspendes,pregunta15-16.aiml
+0,^ COPIO * ALUMNO ^,*,*,<srai>* copio * estudiante ^</srai>,pregunta15-16.aiml
+0,* DEJO COPIAR * ESTUDIANTE ^,*,*,<srai>* copio * estudiante ^</srai>,pregunta15-16.aiml
+0,^ ESTUDIANTE ^ DEJA COPIARME ^,*,*,<srai>* copio * estudiante ^</srai>,pregunta15-16.aiml
+0,* DEJO COPIAR * ALUMNO ^,*,*,<srai>* copio * estudiante ^</srai>,pregunta15-16.aiml
+0,^ ALUMNO ^ DEJA COPIARME ^,*,*,<srai>* copio * estudiante ^</srai>,pregunta15-16.aiml

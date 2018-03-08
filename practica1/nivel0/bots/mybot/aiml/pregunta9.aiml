@@ -1,0 +1,26 @@
+<?xml version="1.0"
+encoding="UTF-8"?>
+<aiml version="2.0">
+
+<category>
+  <pattern>^ consiguen ^ puntos * participacion ^</pattern>
+  <template>
+    Participando en las clases de forma activa
+  </template>
+</category>
+
+<category>
+  <pattern>^ obtener ^ puntos * participacion ^</pattern>
+  <template>
+    <srai>^ consiguen ^ puntos * participacion ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ puntos * participacion * conseguir ^</pattern>
+  <template>
+    <srai>^ consiguen ^ puntos * participacion ^</srai>
+  </template>
+</category>
+
+</aiml>

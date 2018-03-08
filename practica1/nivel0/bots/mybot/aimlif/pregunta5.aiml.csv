@@ -1,0 +1,3 @@
+0,HAY NOTA MINIMA PARA APROBAR,*,*,Para aprobar la asignatura es necesario tener una calificación numérica superior o igual a 5 (sobre 10).,pregunta5.aiml
+0,^ APROBAR * NOTA MINIMA ^,*,*,<srai>HAY NOTA MINIMA PARA APROBAR</srai>,pregunta5.aiml
+0,^ NOTA MINIMA * APROBAR ^,*,*,<srai>HAY NOTA MINIMA PARA APROBAR</srai>,pregunta5.aiml

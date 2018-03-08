@@ -1,0 +1,5 @@
+0,QUE PASA SI NO PUEDO ASISTIR A CLASE REGULARMENTE,*,*,La asistencia a las clases teóricas no será obligatoria#Comma aunque la entrega de pruebas planteadas por el#Newline    profesor se tendrá en cuenta dentro del sistema de evaluación de la asignatura.#Newline    Se requerirá que el estudiante asista al menos a alguna de las sesiones prácticas dentro de los límites de#Newline    entrega de cada práctica y defienda ante el profesor el resultado de la correspondiente práctica. Si el#Newline    alumno no se presenta a defender su práctica#Comma está se dará por no presentada.#Newline    La asistencia a las clases prácticas se tendrá en cuenta en la valoración de las prácticas.,pregunta4.aiml
+0,^ NO * ASITIR A CLASE^,*,*,<srai>QUE PASA SI NO PUEDO ASISTIR A CLASE REGULARMENTE</srai>,pregunta4.aiml
+0,^ NO * ASITIR A CLASE FRECUENTEMENTE^,*,*,<srai>QUE PASA SI NO PUEDO ASISTIR A CLASE REGULARMENTE</srai>,pregunta4.aiml
+0,^ NO * ASITIR A CLASE CON FRECUENCIA^,*,*,<srai>QUE PASA SI NO PUEDO ASISTIR A CLASE REGULARMENTE</srai>,pregunta4.aiml
+0,^ OBLIGATORIO ASITIR A CLASE ^,*,*,<srai>QUE PASA SI NO PUEDO ASISTIR A CLASE REGULARMENTE</srai>,pregunta4.aiml
