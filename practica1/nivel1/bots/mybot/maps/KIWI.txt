@@ -1,6 +1,6 @@
 color: verde amarillo
-tamano: pequeño
+tamano: pequeno
 sabor: acido
-vitaminaa: no
-vitaminab: no
-vitaminac: si
+a: no
+b: no
+c: si

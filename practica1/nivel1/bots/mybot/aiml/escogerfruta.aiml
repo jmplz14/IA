@@ -9,12 +9,12 @@
            <think>
              <!--Escoge una fruta aleatoria-->
              <set var = "lista_frutas"> <readset>frutas</readset> </set>
-             <set var = "frutas"> <get var = "lista_frutas" /> </set>
-             <set var = "cantidad"><srai>COUNT <get var = "frutas"/></srai></set>
+             <set name = "frutas"> <get var = "lista_frutas" /> </set>
+             <set var = "cantidad"><srai>COUNT <get name = "frutas"/></srai></set>
              <set var = "posicion"><srai>RANDOM <get var = "cantidad"/></srai></set>
              <set name = "frutaelegida" >
               <srai>
-                 SELECTITEM <get var = "posicion"/> IN <get var = "frutas"/>
+                 SELECTITEM <get var = "posicion"/> IN <get name = "frutas"/>
               </srai>
              </set>
              <!--Cargamos las claves en una variable-->
@@ -140,6 +140,41 @@
     <pattern>adios</pattern>
     <template>
       <srai>comprobar si la fruta es *</srai>
+    </template>
+  </category>
+
+  <category>
+    <pattern>es *</pattern>
+    <template>
+      <!--Se mira si corresponde con la fruta que fue elegida por el bot-->
+      <think>
+        <set var = "pos">
+          <srai>FINDITEM <star/> IN <get name = "frutaelegida"/></srai>
+        </set>
+      </think>
+        <condition var = "pos">
+          <li value="0">
+            <!--Si no lo es se pasa a mirar si es una de sus caracteristicas-->
+            <think>
+              <set var = "pos">
+                <srai>FINDITEM <star/> IN <get name = "caracteristicasfruta"/></srai>
+              </set>
+            </think>
+
+            <condition var = "pos">
+              <li value="0">
+                no
+              </li>
+              <li>
+                si
+              </li>
+            </condition>
+          </li>
+          <li>
+            si
+          </li>
+        </condition>
+
     </template>
   </category>
 

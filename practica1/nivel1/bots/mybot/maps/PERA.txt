@@ -1,6 +1,6 @@
 color: verde amarillo
 tamano: mediano
 sabor: dulce
-vitamina a: no
-vitamina b: si
-vitamina c: si
+a: no
+b: si
+c: si

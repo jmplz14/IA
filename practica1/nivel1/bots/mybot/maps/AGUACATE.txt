@@ -1,6 +1,6 @@
 color: verde
 tamano: mediano
 sabor: neutro
-vitaminaa: no
-vitaminab: si
-vitaminac: si
+a: no
+b: si
+c: si

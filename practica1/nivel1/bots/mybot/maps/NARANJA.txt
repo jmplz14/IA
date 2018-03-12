@@ -1,6 +1,6 @@
 color: naranja
 tamano: mediano
 sabor: acido
-vitaminaa: no
-vitaminab: si
-vitaminac: si
+a: no
+b: si
+c: si

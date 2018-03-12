@@ -1,6 +1,6 @@
 color: amarillo
 tamano: mediano
 sabor: dulce
-vitaminaa: no
-vitaminab: si
-vitaminac: si
+a: no
+b: si
+c: si

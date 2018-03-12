@@ -1,6 +1,6 @@
 color: marron
-tamano: pequeño
+tamano: pequeno
 sabor: neutro
-vitaminaa: no
-vitaminab: si
-vitaminac: no
+a: no
+b: si
+c: no

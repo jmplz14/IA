@@ -1,6 +1,6 @@
 color: amarillo rojo verde
 tamano: mediano
 sabor: semiacido
-vitaminaa: no
-vitaminab: si
-vitaminac: si
+a: no
+b: si
+c: si

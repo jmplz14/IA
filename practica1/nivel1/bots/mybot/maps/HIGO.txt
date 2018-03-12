@@ -1,6 +1,6 @@
 color: verde morado
-tamano: pequeño
+tamano: pequeno
 sabor: dulce
-vitaminaa: no
-vitaminab: si
-vitaminac: si
+a: no
+b: si
+c: si
