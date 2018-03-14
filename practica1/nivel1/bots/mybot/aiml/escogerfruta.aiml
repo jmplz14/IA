@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aiml version="2.0">
-
+<!--Escoge una fruta aleatoria-->
   <category>
-    <pattern>comprobar si la fruta es *</pattern>
+    <pattern>iniciar eleccion de fruta</pattern>
     <template>
       <condition name = "frutaelegida">
         <li value = "unknown">
@@ -130,21 +130,15 @@
   </category>
 
   <category>
-    <pattern>hola</pattern>
+    <pattern>mostrar fruta elegida</pattern>
     <template>
-      holaa <get name = "frutaelegida" />
+      <get name = "frutaelegida" />
     </template>
   </category>
 
+<!--Se usa para ver si la fruta elegida por el bot tiene una determinada caracteristica-->
   <category>
-    <pattern>adios</pattern>
-    <template>
-      <srai>comprobar si la fruta es *</srai>
-    </template>
-  </category>
-
-  <category>
-    <pattern>es *</pattern>
+    <pattern>caracteristica fruta elegida *</pattern>
     <template>
       <!--Se mira si corresponde con la fruta que fue elegida por el bot-->
       <think>
@@ -171,28 +165,28 @@
             </condition>
           </li>
           <li>
-            si
+            si, acerto la fruta
           </li>
         </condition>
 
     </template>
   </category>
+<!-- se encarga de la ayuda y se le pasa la fruta y la caracteristica-->
   <category>
-    <pattern>la * es *</pattern>
+    <pattern>fruta * caracteristica *</pattern>
     <template>
       <think>
+        <!--Se carga el set de frutas y se mira si esta corresponde con alguna-->
         <set var = "lista_frutas"> <readset>frutas</readset> </set>
         <set var = "frutas"> <get var = "lista_frutas" /> </set>
         <set var = "pos">
-          <srai>FINDITEM MANZANA IN <get var = "frutas"/></srai>
+          <srai>FINDITEM <star/> IN <get var = "frutas"/></srai>
         </set>
-
       </think>
-
       <condition var = "pos">
+        <!--si corresponde se pasa a mirar si tiene es propiedad-->
         <li>
           <think>
-            <set var = "cantidad"><srai>COUNT <get var = "frutas"/></srai></set>
             <!--Cargamos las claves en una variable-->
             <set var = "boolean"> <readset>caracteristicasboolean</readset> </set>
             <set var = "noboolean"> <readset>caracteristicasnoboolean</readset> </set>
@@ -323,5 +317,41 @@
       </condition>
     </template>
   </category>
+  <!--Pregunta sobre la caracteristica de la fruta-->
+  <category>
+    <pattern>la fruta es *</pattern>
+    <template>
+      <srai>caracteristica fruta elegida <star/></srai>
+    </template>
+  </category>
+
+  <category>
+    <pattern>es *</pattern>
+    <template>
+      <srai>caracteristica fruta elegida <star/></srai>
+    </template>
+  </category>
+
+  <category>
+    <pattern>^ tiene vitamina *</pattern>
+    <template>
+      <srai>caracteristica fruta elegida <star/></srai>
+    </template>
+  </category>
+
+  <category>
+    <pattern>el * es *</pattern>
+    <template>
+      <srai>ayuda <star/> <star index = "2"/></srai>
+    </template>
+  </category>
+
+  <category>
+    <pattern>es [el la] *</pattern>
+    <template>
+      <srai>caracteristica fruta elegida <star/></srai>
+    </template>
+  </category>
+
 
 </aiml>
