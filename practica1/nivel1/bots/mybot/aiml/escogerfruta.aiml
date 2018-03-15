@@ -17,113 +17,17 @@
                  SELECTITEM <get var = "posicion"/> IN <get name = "frutas"/>
               </srai>
              </set>
-             <!--Cargamos las claves en una variable-->
-             <set var = "boolean"> <readset>caracteristicasboolean</readset> </set>
-             <set var = "noboolean"> <readset>caracteristicasnoboolean</readset> </set>
-             <!--incia el contador y la salida para los campos no boleanos-->
-             <set var="contador">1</set>
-             <set var="salida">
-               <!--ponemos en la variable salida el tamaño de la lista + 1 que sera cuando pare el bucle-->
-               <map name="successor"><srai>COUNT <get var = "boolean"/></srai></map>
+
+             <set name = "caracteristicasfruta">
+               <srai>
+                cargar map de la fruta <get name = "frutaelegida" />
+               </srai>
              </set>
           </think>
 
-          <condition var="contador">
-            <!--cuando el contador coincida con el tamaño mas 1 sale-->
-            <li>
-              <value><get var="salida"/></value>
-              <!--se elimina el unknow que se tenia desde el principio-->
-              <think>
-                <set name = "caracteristicasfruta">
-                  <srai>
-                    REMOVEITEM <srai>COUNT <get name = "caracteristicasfruta"/></srai> IN <get name = "caracteristicasfruta" />
-                  </srai>
-               </set>
-             </think>
-            </li>
-            <!--cuerpo principal del bucle-->
-            <li>
-              <think>
-
-                <!--se selecciona el campo en la posicion que marca el contador-->
-                <set var = "campo" >
-                 <srai>
-                    SELECTITEM <get var = "contador"/> IN <get var = "noboolean"/>
-                 </srai>
-                </set>
-
-                <!--se selecciona el valor de la key del fichero map de la fruta elegida-->
-                <set var = "valorcampo">
-                  <map><name><get name = "frutaelegida" /></name><get var = "campo" /></map>
-                </set>
-
-                <!--se añade a las caracteristicas de la fruta-->
-                <set name = "caracteristicasfruta">
-                  <srai>
-                    ADDITEM <get var = "valorcampo" /> IN <get name = "caracteristicasfruta" />
-                  </srai>
-                </set>
-                <!--Se aumenta el contador-->
-                <set var="contador">
-                  <map name="successor"><get var="contador"/></map>
-                </set>
-              </think>
-              <loop/>
-
-            </li>
-          </condition>
-       <think>
-          <!--incia el contador y la salida para los campos booleanos-->
-          <set var="contador">1</set>
-          <set var="salida">
-            <!--ponemos en la variable salida el tamaño de la lista + 1 que sera cuando pare el bucle-->
-            <map name="successor"><srai>COUNT <get var = "boolean"/></srai></map>
-          </set>
-       </think>
-
-       <condition var="contador">
-         <!--cuando el contador coincida con el tamaño mas 1 sale-->
-         <li>
-           <value><get var="salida"/></value>
-         </li>
-         <!--cuerpo principal del bucle-->
-         <li>
-           <think>
-
-             <!--se selecciona el campo en la posicion que marca el contador-->
-             <set var = "campo" >
-              <srai>
-                 SELECTITEM <get var = "contador"/> IN <get var = "boolean"/>
-              </srai>
-             </set>
-
-             <!--se selecciona el valor de la key del fichero map de la fruta elegida-->
-             <set var = "valorcampo">
-               <map><name><get name = "frutaelegida" /></name><get var = "campo" /></map>
-             </set>
-             <condition var = "valorcampo">
-               <li value="si">
-                 <!--se añade a las caracteristicas de la fruta-->
-                 <set name = "caracteristicasfruta">
-                   <srai>
-                     ADDITEM <get var = "campo" /> IN <get name = "caracteristicasfruta" />
-                   </srai>
-                 </set>
-              </li>
-              <li></li>
-            </condition>
-             <!--Se aumenta el contador-->
-             <set var="contador">
-               <map name="successor"><get var="contador"/></map>
-             </set>
-           </think>
-           <loop/>
-         </li>
-       </condition>
         </li>
         <li>
 
-         <get name = "frutaelegida" /> <get name = "caracteristicasfruta"/>
        </li>
       </condition>
     </template>
@@ -133,6 +37,12 @@
     <pattern>mostrar fruta elegida</pattern>
     <template>
       <get name = "frutaelegida" />
+    </template>
+  </category>
+  <category>
+    <pattern>mostrar caracteristicas fruta elegida</pattern>
+    <template>
+      <get name = "caracteristicasfruta"/>
     </template>
   </category>
 
@@ -175,6 +85,44 @@
   <category>
     <pattern>fruta * caracteristica *</pattern>
     <template>
+      <set var = "caracteristicasfruta">
+        <srai>cargar map de la fruta <star/></srai>
+      </set>
+      <condition var = "caracteristicasfruta">
+        <li value="no">
+          no
+        </li>
+        <li>
+           <!--Si no lo es se pasa a mirar si es una de sus caracteristicas-->
+         <think>
+           <set var = "pos">
+             <srai>FINDITEM <star index = "2"/> IN <get var = "caracteristicasfruta"/></srai>
+           </set>
+         </think>
+         <condition var = "pos">
+           <li value="0">
+             no
+           </li>
+           <li>
+             si
+           </li>
+         </condition>
+
+        </li>
+      </condition>
+    </template>
+  </category>
+  <!--Pregunta sobre la caracteristica de la fruta-->
+  <category>
+    <pattern>la fruta es *</pattern>
+    <template>
+      <srai>caracteristica fruta elegida <star/></srai>
+    </template>
+  </category>
+
+  <category>
+    <pattern>cargar map de la fruta *</pattern>
+    <template>
       <think>
         <!--Se carga el set de frutas y se mira si esta corresponde con alguna-->
         <set var = "lista_frutas"> <readset>frutas</readset> </set>
@@ -184,6 +132,9 @@
         </set>
       </think>
       <condition var = "pos">
+        <li value="0">
+          no
+        </li>
         <!--si corresponde se pasa a mirar si tiene es propiedad-->
         <li>
           <think>
@@ -294,34 +245,26 @@
              <loop/>
            </li>
          </condition>
-
-           <!--Si no lo es se pasa a mirar si es una de sus caracteristicas-->
-         <think>
-           <set var = "pos">
-             <srai>FINDITEM <star index = "2"/> IN <get var = "caracteristicasfruta"/></srai>
-           </set>
-         </think>
-         <condition var = "pos">
-           <li value="0">
-             no
-           </li>
-           <li>
-             si
-           </li>
-         </condition>
-
-        </li>
-        <li value="0">
-          no
-        </li>
-      </condition>
+         <get var = "caracteristicasfruta"/>
+       </li>
+     </condition>
     </template>
   </category>
-  <!--Pregunta sobre la caracteristica de la fruta-->
+
   <category>
-    <pattern>la fruta es *</pattern>
+    <pattern>map fruta *</pattern>
     <template>
-      <srai>caracteristica fruta elegida <star/></srai>
+      <set var = "corqueta">
+        <srai>cargar map de la fruta <star/></srai>
+      </set>
+      <condition var = "croqueta">
+        <li value = "unknow">
+          fallos
+        </li>
+        <li>dentro</li>
+      </condition>
+      <get var = "croqueta"/>
+
     </template>
   </category>
 
