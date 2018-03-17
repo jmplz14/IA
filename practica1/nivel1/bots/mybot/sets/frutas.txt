@@ -13,4 +13,4 @@ platano
 coco
 aguacate
 nuez
-cerveza
+cereza
