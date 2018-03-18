@@ -85,9 +85,11 @@
   <category>
     <pattern>fruta * caracteristica *</pattern>
     <template>
-      <set var = "caracteristicasfruta">
-        <srai>cargar map de la fruta <star/></srai>
-      </set>
+      <think>
+        <set var = "caracteristicasfruta">
+          <srai>cargar map de la fruta <star/></srai>
+        </set>
+      </think>
       <condition var = "caracteristicasfruta">
         <li value="no">
           no
@@ -182,44 +184,140 @@
       <!--Se cargan las frutas para despues ir eleminando las descartadas en un set-->
       <set var = "lista_frutas"> <readset>frutas</readset> </set>
       <set name = "frutas_no_descartadas"> <get var = "lista_frutas" /> </set>
+    </think>
+    <srai>elegir pregunta</srai>
+  </template>
+</category>
 
-      <set var="contador">1</set>
-      <set var="salida">
-        <!--ponemos en la variable salida el tamaño de la lista + 1 que sera cuando pare el bucle-->
-        <map name="successor"><srai>COUNT <get name = "frutas_no_descartadas"/></srai></map>
+<category>
+  <pattern>elegir pregunta</pattern>
+  <template>
+    <think>
+      <set var = "numfrutas">
+        <srai>COUNT <get name = "frutas_no_descartadas"/></srai>
       </set>
     </think>
 
-    <condition var="contador">
-        <!--cuando el contador coincida con el tamaño mas 1 sale-->
-        <li>
-          <value><get var="salida"/></value>
-        </li>
-        <!--cuerpo principal del bucle-->
-        <li>
-          <!--Se selecciona la fruta de la que introducimos las caracteristica-->
-          <think>
-            <set var = "fruta" >
-             <srai>
-                SELECTITEM <get var = "contador"/> IN <get name = "frutas_no_descartadas"/>
-             </srai>
-            </set>
-            <!--Se añade las caracteristicas de la fruta-->
-            <set var = "caracteristicas" >
-                 <srai>cargar map de la fruta <get var = "fruta"/></srai>
-            </set>
+    <condition var = "numfrutas">
+      <li value = "1">adivinar fruta</li>
+      <li>
+        <think>
+        <set var = "fruta1" >
+         <srai>
+            SELECTITEM 1 IN <get name = "frutas_no_descartadas"/>
+         </srai>
+        </set>
+        <set var = "fruta2" >
+         <srai>
+            SELECTITEM 2 IN <get name = "frutas_no_descartadas"/>
+         </srai>
+        </set>
 
+        <set var = "map1">
+          <srai>
+           cargar map de la fruta <get var = "fruta1" />
+          </srai>
+        </set>
 
-            <set var="contador">
-              <map name="successor"><get var="contador"/></map>
-            </set>
-          </think>
-          <loop/>
+        <set var = "map2">
+          <srai>
+           cargar map de la fruta <get var = "fruta2" />
+          </srai>
+        </set>
 
-        </li>
-      </condition>
+        <set var = "contador1">1</set>
+        <set var = "contador2">1</set>
+        <set var="salida1">
+          <!--ponemos en la variable salida el tamaño de la lista + 1 que sera cuando pare el bucle-->
+          <map name="successor"><srai>COUNT <get var = "map1"/></srai></map>
+        </set>
+        <set var="salida2">
+          <!--ponemos en la variable salida el tamaño de la lista + 1 que sera cuando pare el bucle-->
+          <map name="successor"><srai>COUNT <get var = "map2"/></srai></map>
+        </set>
+      </think>
+        <condition var="contador1">
+          <li><value><get var="salida1"/></value></li>
+          <li value = "no">
+            ¿es <get var = "valor"/>?
+          </li>
+          <li>
+            <think>
+              <set var = "valor">
+                <srai>
+                   SELECTITEM <get var = "contador1"/> IN <get var = "map1"/>
+                </srai>
+              </set>
+              <set var="contador1">
+                <map name="successor"><get var="contador1"/></map>
+              </set>
+              <set var = "valida">
+                <srai>fruta <get var = "fruta2"/> caracteristica <get var = "valor"/> </srai>
+              </set>
+            </think>
+            <condition var = "valida">
+              <li value = "no">
+                <think>
+                  <set var = "contador1">no</set>
+                </think>
+              </li>
+              <li></li>
+            </condition>
+            <loop/>
+          </li>
+        </condition>
+
+        <condition var = "contador1">
+          <li value = "no">
+            <think>
+              <set var = "contador1">no</set>
+            </think>
+          </li>
+          <li>
+
+            <condition var="contador2">
+              <li><value><get var="salida2"/></value></li>
+              <li value = "no">
+                ¿es <get var = "valor"/>?
+              </li>
+              <li>
+                <think>
+                  <set var = "valor">
+                    <srai>
+                       SELECTITEM <get var = "contador1"/> IN <get var = "map2"/>
+                    </srai>
+                  </set>
+                  <set var="contador2">
+                    <map name="successor"><get var="contador2"/></map>
+                  </set>
+                  <set var = "valida">
+                    <srai>fruta <get var = "fruta1"/> caracteristica <get var = "valor"/> </srai>
+                  </set>
+                </think>
+                <condition var = "valida">
+                  <li value = "no">
+                    <think>
+                      <set var = "contador2">no</set>
+                    </think>
+                  </li>
+                  <li></li>
+                </condition>
+                <loop/>
+              </li>
+            </condition>
+
+          </li>
+        </condition>
+      </li>
+    </condition>
+    <think>
+      <set name = "valoranterior">
+        <get var = "valor"/>
+      </set>
+    </think>
   </template>
 </category>
+
 
 
 </aiml>
