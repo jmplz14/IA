@@ -318,6 +318,67 @@
   </template>
 </category>
 
+  <category>
+    <pattern>si</pattern>
+    <template>
+      <think>
 
+        <set name = "caracteristicas_validas">
+          <srai>
+            ADDITEM <get var = "valorcampo" /> IN <get name = "frutas_no_descartadas" />
+          </srai>
+        </set>
+
+        <set var = "contador">1</set>
+        <set var="salida">
+          <!--ponemos en la variable salida el tamaño de la lista + 1 que sera cuando pare el bucle-->
+          <map name="successor"><srai>COUNT <get name = "frutas_no_descartadas"/></srai></map>
+        </set>
+
+      </think>
+
+      <condition var = "contador">
+        <li><value><get var = "salida"/></value></li>
+        <li>
+          <think>
+
+            <set var = "fruta">
+              <srai>
+                 SELECTITEM <get var = "contador"/> IN <get name = "frutas_no_descartadas"/>
+              </srai>
+            </set>
+            <set var = "valido">
+              <srai>
+                fruta <get var = "fruta" /> caracteristica <get name = "valoranterior" />
+              </srai>
+            </set>
+          </think>
+          <condition var = "valido">
+            <li value = "no">
+              <think>
+                <set name = "frutas_no_descartadas">
+                  <srai>
+                    REMOVEITEM <get var = "contador"/> IN <get name = "frutas_no_descartadas"/>
+                  </srai>
+                </set>
+              </think>
+            </li>
+            <li>
+              <think>
+                <set var="contador">
+                  <map name="successor"><get var="contador"/></map>
+                </set>
+              </think>
+            </li>
+          </condition>
+
+
+          <loop/>
+
+        </li>
+      </condition>
+      <srai>elegir pregunta</srai>
+    </template>
+  </category>
 
 </aiml>
