@@ -1,0 +1,33 @@
+<?xml version="1.0"
+encoding="UTF-8"?>
+<aiml version="2.0">
+
+<category>
+  <pattern>^ hacer * no * seguro * superar * nivel 3 * practica 1 ^</pattern>
+  <template>
+    Realizar el nivel 2 en vez del 3
+  </template>
+</category>
+
+<category>
+    <pattern>^ nivel 3 * practica 1 * no * seguro superar * hacer ^</pattern>
+  <template>
+    <srai>^ hacer * no * seguro * superar * nivel 3 * practica 1 ^</srai>
+  </template>
+</category>
+
+<category>
+    <pattern>^ hago * no * seguro * superar * nivel 3 * practica 1 ^</pattern>
+  <template>
+    <srai>^ hacer * no * seguro * superar * nivel 3 * practica 1 ^</srai>
+  </template>
+</category>
+
+<category>
+    <pattern>^ nivel 3 * practica 1 * no * seguro superar * hago ^</pattern>
+  <template>
+    <srai>^ hacer * no * seguro * superar * nivel 3 * practica 1 ^</srai>
+  </template>
+</category>
+
+</aiml>

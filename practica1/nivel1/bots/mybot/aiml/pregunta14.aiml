@@ -1,0 +1,32 @@
+<?xml version="1.0"
+encoding="UTF-8"?>
+<aiml version="2.0">
+
+<category>
+  <pattern>^ recuperar ^ practica o examen ^</pattern>
+  <template>
+    No se pueden recuperar una practica o un examen por separado
+  </template>
+</category>
+
+<category>
+  <pattern>^ practica o examen ^ recuperar ^</pattern>
+  <template>
+    <srai>^ recuperar ^ practica o examen ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ repetir ^ practica o examen ^</pattern>
+  <template>
+    <srai>^ recuperar ^ practica o examen ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ practica o examen ^ repetir ^</pattern>
+  <template>
+    <srai>^ recuperar ^ practica o examen ^</srai>
+  </template>
+</category>
+</aiml>

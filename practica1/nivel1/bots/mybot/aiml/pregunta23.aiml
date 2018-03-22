@@ -1,0 +1,34 @@
+<?xml version="1.0"
+encoding="UTF-8"?>
+<aiml version="2.0">
+
+<category>
+  <pattern>^ entregar ^ practica 1 sin hacer ^ nivel 0 </pattern>
+  <template>
+    No se puede entregar si no se realiza el nivel 0
+  </template>
+</category>
+
+<category>
+  <pattern>^ sin hacer ^ nivel 0 ^ entregar ^ practica 1 ^</pattern>
+  <template>
+    <srai>^ entregar ^ practica 1 sin hacer ^ nivel 0 </srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ entregar ^ practica 1 sin hacer ^ nivel 0 </pattern>
+  <template>
+    <srai>^ entregar ^ practica 1 sin hacer ^ nivel 0 </srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ sin hacer ^ nivel 0 ^ se evalua ^ practica 1 ^</pattern>
+  <template>
+    <srai>^ entregar ^ practica 1 sin hacer ^ nivel 0 </srai>
+  </template>
+</category>
+
+
+</aiml>

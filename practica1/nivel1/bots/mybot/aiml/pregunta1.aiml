@@ -1,0 +1,158 @@
+<?xml version="1.0"
+encoding="UTF-8"?>
+<aiml version="2.0">
+
+<category>
+    <pattern>COMO CONSIGO SUPERAR LA PARTE PRACTICA</pattern>
+    <template>
+      Para la parte de prácticas se tendrá en cuenta la asistencia y participación a las clases (esta parte constituye el
+      10% de la nota de prácticas), y adicionalmente se realizarán tres prácticas y un examen de problemas, la nota
+      será la media de estas cuatro pruebas (esta parte constituye el 90% de la nota de prácticas). La parte de
+      prácticas se realiza por evaluación continua y no se realizará un examen final.
+      Se necesitara un 3 como minimo para hacer media con teoría.
+  </template>
+</category>
+
+<category>
+  <pattern>^ superar ^ parte practica ^</pattern>
+  <template>
+    <srai>COMO CONSIGO SUPERAR LA PARTE PRACTICA</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ supera ^ parte practica ^</pattern>
+  <template>
+    <srai>COMO CONSIGO SUPERAR LA PARTE PRACTICA</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ parte practica * supera ^</pattern>
+  <template>
+    <srai>COMO CONSIGO SUPERAR LA PARTE PRACTICA</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ superar ^ practicas ^</pattern>
+  <template>
+    <srai>COMO CONSIGO SUPERAR LA PARTE PRACTICA</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ superan * practicas ^</pattern>
+  <template>
+    <srai>COMO CONSIGO SUPERAR LA PARTE PRACTICA</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ practicas ^ superar ^</pattern>
+  <template>
+    <srai>COMO CONSIGO SUPERAR LA PARTE PRACTICA</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ practicas * superan ^</pattern>
+  <template>
+    <srai>COMO CONSIGO SUPERAR LA PARTE PRACTICA</srai>
+  </template>
+</category>.
+
+<category>
+  <pattern>^ aprobar ^ parte practica ^</pattern>
+  <template>
+    <srai>COMO CONSIGO SUPERAR LA PARTE PRACTICA</srai>
+  </template>
+</category>
+<category>
+  <pattern>^ aprobar ^ practicas ^</pattern>
+  <template>
+    <srai>COMO CONSIGO SUPERAR LA PARTE PRACTICA</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ parte practica * aprueba ^</pattern>
+  <template>
+    <srai>COMO CONSIGO SUPERAR LA PARTE PRACTICA</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ aprueba ^ practicas ^</pattern>
+  <template>
+    <srai>COMO CONSIGO SUPERAR LA PARTE PRACTICA</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ aprueban ^ practicas ^</pattern>
+  <template>
+    <srai>COMO CONSIGO SUPERAR LA PARTE PRACTICA</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ practicas ^ aprueban ^</pattern>
+  <template>
+    <srai>COMO CONSIGO SUPERAR LA PARTE PRACTICA</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ practicas * apruebo ^</pattern>
+  <template>
+    <srai>COMO CONSIGO SUPERAR LA PARTE PRACTICA</srai>
+  </template>
+</category>
+//
+<category>
+  <pattern>^ apruebo ^ parte practica ^</pattern>
+  <template>
+    <srai>COMO CONSIGO SUPERAR LA PARTE PRACTICA</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ parte practica * aprobar ^</pattern>
+  <template>
+    <srai>COMO CONSIGO SUPERAR LA PARTE PRACTICA</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ parte practica * apruebo ^</pattern>
+  <template>
+    <srai>COMO CONSIGO SUPERAR LA PARTE PRACTICA</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ apruebo ^ practicas ^</pattern>
+  <template>
+    <srai>COMO CONSIGO SUPERAR LA PARTE PRACTICA</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ apruebo ^ practicas ^</pattern>
+  <template>
+    <srai>COMO CONSIGO SUPERAR LA PARTE PRACTICA</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ practicas ^ apruebo ^</pattern>
+  <template>
+    <srai>COMO CONSIGO SUPERAR LA PARTE PRACTICA</srai>
+  </template>
+</category>
+
+
+
+
+</aiml>

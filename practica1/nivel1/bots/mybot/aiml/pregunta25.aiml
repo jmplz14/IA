@@ -1,0 +1,53 @@
+<?xml version="1.0"
+encoding="UTF-8"?>
+<aiml version="2.0">
+
+<category>
+  <pattern>^ cuantas pruebas teoricas ^ largo * curso ^</pattern>
+  <template>
+    Tres parciales y un examen final
+  </template>
+</category>
+
+
+<category>
+    <pattern>^ examenes ^ largo * curso ^</pattern>
+  <template>
+    <srai>^ cuantas pruebas teoricas ^ largo * curso ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ largo * curso cuantas pruebas teoricas  ^</pattern>
+  <template>
+    <srai>^ cuantas pruebas teoricas ^ largo * curso ^</srai>
+  </template>
+</category>
+
+
+<category>
+    <pattern>^ largo * curso cuantos ^ examenes ^</pattern>
+  <template>
+    <srai>^ cuantas pruebas teoricas ^ largo * curso ^</srai>
+  </template>
+</category>
+
+
+<category>
+    <pattern>^ examenes ^ largo * curso ^</pattern>
+  <template>
+    <srai>^ cuantas pruebas teoricas ^ largo * curso ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ numero examenes * largo * curso ^</pattern>
+  <template>
+    <srai>^ cuantas pruebas teoricas ^ largo * curso ^</srai>
+  </template>
+</category>
+
+
+
+
+</aiml>

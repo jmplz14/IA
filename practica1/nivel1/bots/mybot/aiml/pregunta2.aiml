@@ -1,0 +1,74 @@
+<?xml version="1.0"
+encoding="UTF-8"?>
+<aiml version="2.0">
+
+<category>
+  <pattern>COMO SE EVALUA EN LA CONVOCATORIO ORDINARIA</pattern>
+  <template>
+    Para la parte de teoría se realizará un examen final que se valorará sobre 10. Durante el curso se realizarán tres
+    pruebas que conjuntamente podrían dar un máximo de 2 puntos sobre el examen final. La nota final de teoría
+    sería el mínimo entre 10 y la suma de la nota del examen con la nota obtenida en las pruebas parciales.
+    Para la parte de prácticas se tendrá en cuenta la asistencia y participación a las clases (esta parte constituye el
+    10% de la nota de prácticas), y adicionalmente se realizarán tres prácticas y un examen de problemas, la nota
+    será la media de estas cuatro pruebas (esta parte constituye el 90% de la nota de prácticas). La parte de
+    prácticas se realiza por evaluación continua y no se realizará un examen final.
+  </template>
+</category>
+
+<category>
+  <pattern>^ evalua ^ convocatoria ordinaria ^</pattern>
+  <template>
+    <srai>COMO SE EVALUA EN LA CONVOCATORIO ORDINARIA</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ convocatoria ordinaria ^ evalua ^</pattern>
+  <template>
+    <srai>COMO SE EVALUA EN LA CONVOCATORIO ORDINARIA</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ evaluar ^ convocatoria ordinaria ^</pattern>
+  <template>
+    <srai>COMO SE EVALUA EN LA CONVOCATORIO ORDINARIA</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ convocatoria ordinaria ^ evaluar ^</pattern>
+  <template>
+    <srai>COMO SE EVALUA EN LA CONVOCATORIO ORDINARIA</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ puntua ^ convocatoria ordinaria ^</pattern>
+  <template>
+    <srai>COMO SE EVALUA EN LA CONVOCATORIO ORDINARIA</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ convocatoria ordinaria ^ puntua ^</pattern>
+  <template>
+    <srai>COMO SE EVALUA EN LA CONVOCATORIO ORDINARIA</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ puntuar ^ convocatoria ordinaria ^</pattern>
+  <template>
+    <srai>COMO SE EVALUA EN LA CONVOCATORIO ORDINARIA</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ convocatoria ordinaria ^ puntuar ^</pattern>
+  <template>
+    <srai>COMO SE EVALUA EN LA CONVOCATORIO ORDINARIA</srai>
+  </template>
+</category>
+
+</aiml>

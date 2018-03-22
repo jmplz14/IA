@@ -1,0 +1,29 @@
+<?xml version="1.0"
+encoding="UTF-8"?>
+<aiml version="2.0">
+
+<category>
+  <pattern>^ practicas son obligatorias  ^</pattern>
+  <template>
+    Se requerirá que el estudiante asista al menos a alguna de las sesiones prácticas dentro de los límites de
+    entrega de cada práctica y defienda ante el profesor el resultado de la correspondiente práctica. Si el
+    alumno no se presenta a defender su práctica, está se dará por no presentada.
+  </template>
+</category>
+
+<category>
+  <pattern>^ son obligatorias las practicas ^</pattern>
+  <template>
+    <srai>^ practicas son obligatorias  ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ son las practicas necesarias ^</pattern>
+  <template>
+    <srai>^ practicas son obligatorias  ^</srai>
+  </template>
+</category>
+
+
+</aiml>

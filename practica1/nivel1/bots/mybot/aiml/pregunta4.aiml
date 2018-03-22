@@ -1,0 +1,47 @@
+<?xml version="1.0"
+encoding="UTF-8"?>
+<aiml version="2.0">
+
+<category>
+  <pattern>QUE PASA SI NO PUEDO ASISTIR A CLASE REGULARMENTE</pattern>
+  <template>
+    La asistencia a las clases teóricas no será obligatoria, aunque la entrega de pruebas planteadas por el
+    profesor se tendrá en cuenta dentro del sistema de evaluación de la asignatura.
+    Se requerirá que el estudiante asista al menos a alguna de las sesiones prácticas dentro de los límites de
+    entrega de cada práctica y defienda ante el profesor el resultado de la correspondiente práctica. Si el
+    alumno no se presenta a defender su práctica, está se dará por no presentada.
+    La asistencia a las clases prácticas se tendrá en cuenta en la valoración de las prácticas.
+  </template>
+</category>
+
+<category>
+  <pattern>^ no * asitir a clase ^</pattern>
+  <template>
+    <srai>QUE PASA SI NO PUEDO ASISTIR A CLASE REGULARMENTE</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ no * asitir a clase frecuentemente ^</pattern>
+  <template>
+    <srai>QUE PASA SI NO PUEDO ASISTIR A CLASE REGULARMENTE</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ no * asitir a clase con frecuencia ^</pattern>
+  <template>
+    <srai>QUE PASA SI NO PUEDO ASISTIR A CLASE REGULARMENTE</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ obligatorio asitir a clase ^</pattern>
+  <template>
+    <srai>QUE PASA SI NO PUEDO ASISTIR A CLASE REGULARMENTE</srai>
+  </template>
+</category>
+
+
+
+</aiml>

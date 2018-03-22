@@ -1,0 +1,35 @@
+<?xml version="1.0"
+encoding="UTF-8"?>
+<aiml version="2.0">
+
+<category>
+  <pattern>^ yo programo muy bien * c++ * hacer * practica 1 * lenguaje ^</pattern>
+  <template>
+    Rotundamente noo
+  </template>
+</category>
+
+<category>
+    <pattern>^ hacer * practica 1 * c++ * programo muy bien * lenguaje ^</pattern>
+  <template>
+    <srai>^ yo programo * c++ * hacer * practica 1 * lenguaje ^</srai>
+  </template>
+</category>
+
+<category>
+    <pattern>^ realizar * practica 1 * c++ * programo muy bien * lenguaje ^</pattern>
+  <template>
+    <srai>^ yo programo * c++ * hacer * practica 1 * lenguaje ^</srai>
+  </template>
+</category>
+
+<category>
+    <pattern>^ yo programo muy bien * c++ * realizar * practica 1 * lenguaje ^</pattern>
+  <template>
+    <srai>^ yo programo * c++ * hacer * practica 1 * lenguaje ^</srai>
+  </template>
+</category>
+
+
+
+</aiml>

@@ -1,0 +1,35 @@
+<?xml version="1.0"
+encoding="UTF-8"?>
+<aiml version="2.0">
+
+<category>
+  <pattern>^ suspendo ^ convocatoria ordinaria ^</pattern>
+  <template>
+    En la convocatoria de septiembre habrá un examen escrito único (evaluado de 0 a 10) que incluirá preguntas
+tanto de tipo teórico como práctico que garanticen que el alumno ha adquirido la totalidad de las competencias
+descritas en esta misma guía docente. No habrá entrega de prácticas en esta convocatoria.
+  </template>
+</category>
+
+<category>
+  <pattern>^ no apruebo ^ convocatoria ordinaria ^</pattern>
+  <template>
+    <srai>^ suspendo ^ convocatoria ordinaria ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ convocatoria ordinaria ^ suspendo ^</pattern>
+  <template>
+    <srai>^ suspendo ^ convocatoria ordinaria ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ convocatoria ordinaria ^ suspendes ^</pattern>
+  <template>
+    <srai>^ suspendo ^ convocatoria ordinaria ^</srai>
+  </template>
+</category>
+
+</aiml>

@@ -1,0 +1,33 @@
+<?xml version="1.0"
+encoding="UTF-8"?>
+<aiml version="2.0">
+
+<category>
+  <pattern>^ hacer ^ trabajos en grupo ^</pattern>
+  <template>
+    No, Los trabjos se haran de forma individual
+  </template>
+</category>
+
+<category>
+  <pattern>^ hacer en grupo * trabajos ^</pattern>
+  <template>
+    <srai>^ hacer ^ trabajos en grupo ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ trabajos * hacer en grupo ^</pattern>
+  <template>
+    <srai>^ hacer ^ trabajos en grupo ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ hacer ^ trabajos * grupo ^</pattern>
+  <template>
+    <srai>^ hacer ^ trabajos en grupo ^</srai>
+  </template>
+</category>
+
+</aiml>

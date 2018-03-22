@@ -1,0 +1,47 @@
+<?xml version="1.0"
+encoding="UTF-8"?>
+<aiml version="2.0">
+
+<category>
+  <pattern>^ vale ^ practica ^ y ^ teoria ^</pattern>
+  <template>
+    valen 50% de la nota final cada parte.
+  </template>
+</category>
+
+<category>
+  <pattern>^ vale ^ teoria ^ y ^ practica ^</pattern>
+  <template>
+    <srai>^ vale ^ practica ^ y ^ teoria ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ vale ^ practicas ^ y ^ teoria ^</pattern>
+  <template>
+    <srai>^ vale ^ practica ^ y ^ teoria ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ vale ^ teoria ^ y ^ practicas ^</pattern>
+  <template>
+    <srai>^ vale ^ practica ^ y ^ teoria ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ porcentaje ^ practicas ^ y ^ teoria ^</pattern>
+  <template>
+    <srai>^ vale ^ practica ^ y ^ teoria ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ porcentaje ^ teoria ^ y ^ practicas ^</pattern>
+  <template>
+    <srai>^ vale ^ practica ^ y ^ teoria ^</srai>
+  </template>
+</category>
+
+</aiml>

@@ -1,0 +1,51 @@
+<?xml version="1.0"
+encoding="UTF-8"?>
+<aiml version="2.0">
+
+<category>
+  <pattern>^ vale * primera prueba teorica ^</pattern>
+  <template>
+    La primera prueba teorica vale 0.66
+  </template>
+</category>
+
+
+<category>
+    <pattern>^ valor * primera prueba teorica ^</pattern>
+  <template>
+    <srai>^ vale * primera prueba teorica ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ valor * primera examen ^ teoria ^</pattern>
+  <template>
+    <srai>^ vale * primera prueba teorica ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ vale * primera examen ^ teoria ^</pattern>
+  <template>
+    <srai>^ vale * primera prueba teorica ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ primera examen ^ teoria * valor tiene ^</pattern>
+  <template>
+    <srai>^ vale * primera prueba teorica ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ primera examen ^ teoria * vale ^</pattern>
+  <template>
+    <srai>^ vale * primera prueba teorica ^</srai>
+  </template>
+</category>
+
+
+
+
+</aiml>

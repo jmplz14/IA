@@ -1,0 +1,40 @@
+<?xml version="1.0"
+encoding="UTF-8"?>
+<aiml version="2.0">
+
+<category>
+  <pattern>^ puntuacion ^ practica 1 * defender ^ nivel 3 ^ no lo supero ^</pattern>
+  <template>
+    optas a un 6
+  </template>
+</category>
+
+<category>
+  <pattern>^ defender ^ nivel 3 * practica 1 ^ puntuacion  * no lo supero ^</pattern>
+  <template>
+    <srai>^ puntuacion ^ practica 1 * defender ^ nivel 3 ^ no lo supero ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ defender ^ nivel 3 * practica 1 ^ no lo supero * puntuacion ^</pattern>
+  <template>
+    <srai>^ puntuacion ^ practica 1 * defender ^ nivel 3 ^ no lo supero ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ defender ^ nivel 3 * practica 1 ^ puntuacion  * no * superar ^</pattern>
+  <template>
+    <srai>^ puntuacion ^ practica 1 * defender ^ nivel 3 ^ no lo supero ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ defender ^ nivel 3 * practica 1 ^ no * superar * puntuacion ^</pattern>
+  <template>
+    <srai>^ puntuacion ^ practica 1 * defender ^ nivel 3 ^ no consigo superor ^</srai>
+  </template>
+</category>
+
+</aiml>

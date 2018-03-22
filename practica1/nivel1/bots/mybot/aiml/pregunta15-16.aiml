@@ -1,0 +1,48 @@
+<?xml version="1.0"
+encoding="UTF-8"?>
+<aiml version="2.0">
+
+<category>
+  <pattern>* copio * estudiante ^</pattern>
+  <template>
+    Si te pilla el profesor suspendes
+  </template>
+</category>
+
+<category>
+  <pattern>^ copio * alumno ^</pattern>
+  <template>
+    <srai>* copio * estudiante ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>* dejo copiar * estudiante ^</pattern>
+  <template>
+    <srai>* copio * estudiante ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ estudiante ^ deja copiarme ^</pattern>
+  <template>
+    <srai>* copio * estudiante ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>* dejo copiar * alumno ^</pattern>
+  <template>
+    <srai>* copio * estudiante ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ alumno ^ deja copiarme ^</pattern>
+  <template>
+    <srai>* copio * estudiante ^</srai>
+  </template>
+</category>
+
+
+</aiml>

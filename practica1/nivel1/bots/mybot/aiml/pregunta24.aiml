@@ -1,0 +1,40 @@
+<?xml version="1.0"
+encoding="UTF-8"?>
+<aiml version="2.0">
+
+
+<category>
+  <pattern>^ no * asistir ^ correccion * practica 1 ^</pattern>
+  <template>
+    Avise a su profesor de practicas para acudir a otra sesion.
+  </template>
+</category>
+
+<category>
+  <pattern>^ no * asistir ^ defensa * practica 1 ^</pattern>
+  <template>
+    <srai>^ no * asistir ^ correccion * practica 1 ^</srai>
+  </template>
+</category>
+
+<category>
+  <pattern>^ voy a faltar ^ correccion * practica 1 ^</pattern>
+  <template>
+    <srai>^ no * asistir ^ correccion * practica 1 ^</srai>
+  </template>
+</category>
+<category>
+  <pattern>^ voy a faltar ^ defensa * practica 1 ^</pattern>
+  <template>
+    <srai>^ no * asistir ^ correccion * practica 1 ^</srai>
+  </template>
+</category>
+<category>
+  <pattern>^ [correccion defensa] * practica 1 ^ no * asistir ^</pattern>
+  <template>
+    <srai>^ no * asistir ^ correccion * practica 1 ^</srai>
+  </template>
+</category>
+
+
+</aiml>
