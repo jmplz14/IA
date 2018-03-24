@@ -15,10 +15,13 @@ public:
 	Agent(){
 		CNY70_=false;
 		BUMPER_=false;
-		CHOQUEARRIBA_=false;
-		CHOQUEDERECHA_=false;
+		CHOQUEPARED_=false;
+		CHOQUEESQUINA_=false;
+		GIRODERECHA_=false;
 		TAMANOLATERAL_=0;
 		TAMANOTOTAL_=0;
+		CAMBIARTIRA_=false;
+		RECOLOCAR_ = false;
 	}
 
 	enum ActionType
@@ -33,12 +36,18 @@ public:
 
 	void Perceive(const Environment &env);
 	ActionType Think();
+	ActionType colocarEsquina();
+	ActionType recorrerTira();
+	ActionType cambiarTira();
 
 private:
 	bool CNY70_;
 	bool BUMPER_;
-	bool CHOQUEARRIBA_;
-	bool CHOQUEDERECHA_;
+	bool CHOQUEPARED_;
+	bool CHOQUEESQUINA_;
+	bool GIRODERECHA_;
+	bool CAMBIARTIRA_;
+	bool RECOLOCAR_;
 	int TAMANOLATERAL_;
 	int TAMANOTOTAL_;
 };
