@@ -42,7 +42,7 @@ Agent::ActionType Agent::Think()
 	}*/
 	//Apartado b
 
-	if(BUMPER_){
+	/*if(BUMPER_){
 		accion = Agent::actIDLE;
 	}else if(!CHOQUEPARED_ || !CHOQUEESQUINA_)
 		accion = colocarEsquina();
@@ -70,7 +70,43 @@ Agent::ActionType Agent::Think()
 
 	}else{
 		accion = Agent::actIDLE;
+	}*/
+
+	//apartado c
+	if(BUMPER_){
+		accion = Agent::actTURN_R;
+	}else{
+		if(CONTARTIRA_){
+			accion = contarTira();
+		}else{
+			if(VOLVER_){
+				accion = volverObjeto();
+			}else{
+				//if(CARAACTUAL_ < 5){
+					if(CAMBIARCARA_ && !RECOLOCAR_ && !CAMBIARTIRA_){
+						accion = Agent::actFORWARD;
+						RECOLOCAR_ = true;
+					}else if(CAMBIARCARA_ && RECOLOCAR_ && !CAMBIARTIRA_){
+						accion = Agent::actTURN_L;
+						CAMBIARTIRA_ = true;
+					}else{
+						accion = Agent::actFORWARD;
+						CAMBIARTIRA_ = false;
+						RECOLOCAR_ = false;
+						CAMBIARCARA_ = false;
+						CONTARTIRA_ = true;
+						ACTUAL_ = 0;
+						CARAACTUAL_++;
+					}
+				//}else{
+
+				//}
+			}
+		}
+
+
 	}
+
 
 	return static_cast<ActionType> (accion);
 
@@ -97,6 +133,51 @@ Agent::ActionType Agent::colocarEsquina(){
 	return static_cast<ActionType> (accion);
 }
 
+Agent::ActionType Agent::contarTira(){
+	int accion = 0;
+	if(!CNY70_){
+		if(!GIRODERECHA_){
+			accion = Agent::actTURN_R;
+			GIRODERECHA_ = true;
+		}else{
+			accion = Agent::actFORWARD;
+			ACTUAL_++;
+		}
+	}else{
+
+		if(ACTUAL_ < MINIMO_){
+			NUMCARAMINIMO_ = CARAACTUAL_;
+			MINIMO_ = ACTUAL_;
+		}
+
+		ACTUAL_--;
+		if(ACTUAL_ >= 0){
+			accion = Agent::actBACKWARD;
+			VOLVER_ = true;
+		}else{
+			CAMBIARCARA_ = true;
+			accion = Agent::actTURN_L;
+		}
+
+		GIRODERECHA_ = false;
+		CONTARTIRA_ = false;
+	}
+	return static_cast<ActionType> (accion);
+}
+
+Agent::ActionType Agent::volverObjeto(){
+	int accion = 0;
+	if(ACTUAL_ > 0){
+		accion = Agent::actBACKWARD;
+		ACTUAL_--;
+	}else{
+		VOLVER_ = false;
+		CAMBIARCARA_ = true;
+		accion = Agent::actTURN_L;
+
+	}
+	return static_cast<ActionType> (accion);
+}
 Agent::ActionType Agent::recorrerTira(){
 	int accion = 0;
 	if(!CNY70_){
@@ -111,9 +192,20 @@ Agent::ActionType Agent::recorrerTira(){
 	}
 	return static_cast<ActionType> (accion);
 }
-Agent::ActionType Agent::cambiarTira(){
 
+Agent::ActionType Agent::cambiarCara(){
+	int accion = 0;
+
+	if(!RECOLOCAR_){
+		accion = Agent::actFORWARD;
+		RECOLOCAR_ = true;
+	}
+
+
+
+	return static_cast<ActionType> (accion);
 }
+
 // -----------------------------------------------------------
 void Agent::Perceive(const Environment &env)
 {

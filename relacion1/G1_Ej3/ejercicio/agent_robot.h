@@ -22,6 +22,15 @@ public:
 		TAMANOTOTAL_=0;
 		CAMBIARTIRA_=false;
 		RECOLOCAR_ = false;
+		//apartado c
+		CAMBIARCARA_ = false;
+		VOLVER_ = false;
+		CONTARTIRA_ = true;
+		MINIMO_ = 100;
+		ACTUAL_ = 0;
+		CARAACTUAL_ = 0;
+		NUMCARAMINIMO_;
+
 	}
 
 	enum ActionType
@@ -39,6 +48,10 @@ public:
 	ActionType colocarEsquina();
 	ActionType recorrerTira();
 	ActionType cambiarTira();
+	ActionType cambiarCara();
+	ActionType volverObjeto();
+	ActionType rotar();
+	ActionType contarTira();
 
 private:
 	bool CNY70_;
@@ -48,8 +61,17 @@ private:
 	bool GIRODERECHA_;
 	bool CAMBIARTIRA_;
 	bool RECOLOCAR_;
+	bool CONTARTIRA_;
+	bool CAMBIARCARA_;
+	bool VOLVER_;
 	int TAMANOLATERAL_;
 	int TAMANOTOTAL_;
+	int MINIMO_;
+	int ACTUAL_;
+	int CARAACTUAL_;
+	int NUMCARAMINIMO_;
+
+
 };
 
 string ActionStr(Agent::ActionType);
