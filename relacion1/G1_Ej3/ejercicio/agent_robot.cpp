@@ -142,7 +142,7 @@ Agent::ActionType Agent::colocarEsquina(){
 
 Agent::ActionType Agent::contarTira(){
 	int accion = 0;
-	if(!CNY70_){
+	if(!CNY70_ && ACTUAL_ < MINIMO_){
 		if(!GIRODERECHA_){
 			accion = Agent::actTURN_R;
 			GIRODERECHA_ = true;
