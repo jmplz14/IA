@@ -36,7 +36,7 @@ GLUI_FileBrowser *map_list;
 
 void GUI::myGlutReshape(int w,int h){
 	GLUI_Master.get_viewport_area(&tx,&ty,&tw,&th);
-	
+
 	glViewport(tx,ty,tw,th);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -161,33 +161,33 @@ int GUI::startDraw(int argc,char **argv){
 	glutInitDisplayMode( GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH );
 	glutInitWindowPosition(50,50);
 	glutInitWindowSize(668,693);
-	
+
 	int main_window=glutCreateWindow("Ejercicio 3 - Robot");
 	GLUI_Master.set_glutReshapeFunc(myGlutReshape);
 	glutDisplayFunc(myGlutDisplay);
 		glEnable(GL_DEPTH_TEST);
-			
+
 	score_glui=GLUI_Master.create_glui_subwindow(main_window,GLUI_SUBWINDOW_BOTTOM);
-		new GLUI_StaticText(score_glui,""); 
+		new GLUI_StaticText(score_glui,"");
 		time_run_text = new GLUI_StaticText(score_glui,"");
-		new GLUI_StaticText(score_glui,""); 
+		new GLUI_StaticText(score_glui,"");
 		time_step_text = new GLUI_StaticText(score_glui,"");
-		new GLUI_StaticText(score_glui,""); 
+		new GLUI_StaticText(score_glui,"");
 		action_text = new GLUI_StaticText(score_glui,"");
-		new GLUI_StaticText(score_glui,""); 
+		new GLUI_StaticText(score_glui,"");
 		complete_runs_text = new GLUI_StaticText(score_glui,"");
-		new GLUI_StaticText(score_glui,""); 
-		
+		new GLUI_StaticText(score_glui,"");
+
     	new GLUI_StaticText(score_glui,"");//¥HªÅ¥Õ¦æ°µ¤À¹j
-    	robot_text = new GLUI_StaticText(score_glui,"");		
-		
+    	robot_text = new GLUI_StaticText(score_glui,"");
+
 	score_glui->set_main_gfx_window( main_window );
 	main_glui=GLUI_Master.create_glui_subwindow(main_window,GLUI_SUBWINDOW_RIGHT);
-		new GLUI_StaticText(main_glui,""); 
+		new GLUI_StaticText(main_glui,"");
 		new_map_btn=new GLUI_Button(main_glui,"Nuevo Mapa",NEWMAP_BTN_ID,control_cb);
 		select_map_btn=new GLUI_Button(main_glui,"Elegir Mapa",SELECTMAP_BTN_ID,control_cb);
-		new GLUI_StaticText(main_glui,""); 
-		new GLUI_StaticText(main_glui,""); 
+		new GLUI_StaticText(main_glui,"");
+		new GLUI_StaticText(main_glui,"");
 		do_one_step_btn=new GLUI_Button(main_glui,"Paso",DO_ONE_STEP_BTN_ID,control_cb);
 		do_one_step_btn->disable();
 		do_one_run_btn=new GLUI_Button(main_glui,"Ejecucion",DO_ONE_RUN_BTN_ID,control_cb);
@@ -196,15 +196,15 @@ int GUI::startDraw(int argc,char **argv){
 		next_run_btn->disable();
 		do_all_run_btn=new GLUI_Button(main_glui,"Todas las ejec.",DO_ALL_RUN_BTN_ID,control_cb);
 		do_all_run_btn->disable();
-		new GLUI_StaticText(main_glui,""); 
-		new GLUI_StaticText(main_glui,""); 
+		new GLUI_StaticText(main_glui,"");
+		new GLUI_StaticText(main_glui,"");
 		new GLUI_EditText(main_glui,"Pasos:",display_step);
 		new GLUI_EditText(main_glui,"Retardo:",display_time);
-		new GLUI_StaticText(main_glui,""); 
+		new GLUI_StaticText(main_glui,"");
 		display_btn=new GLUI_Button(main_glui,"Ejecutar",DISPLAY_BTN_ID,control_cb);
 		display_btn->disable();
-		new GLUI_StaticText(main_glui,""); 
-		new GLUI_StaticText(main_glui,""); 
+		new GLUI_StaticText(main_glui,"");
+		new GLUI_StaticText(main_glui,"");
 
 		new GLUI_Button(main_glui,"Salir",0,(GLUI_Update_CB)exit );
 	main_glui->set_main_gfx_window( main_window );
@@ -220,19 +220,19 @@ void GUI::showScore(){
 	sout.str("");
 	sout<<"Paso "<<current_time<<"/"<<life_time_temp;
 	time_step_text->set_text(sout.str().c_str());
-	
+
 	sout.str("");
 	sout<<"Accion "<<ActionStr(action);
 	action_text->set_text(sout.str().c_str());
 
 	long long complete_runs=current_run-(current_time!=life_time);
-	//The Round has been completed 
+	//The Round has been completed
 	sout.str("");
 	sout<<"Ejecuciones completas "<<complete_runs<<"/"<<total_runs_temp;
-	complete_runs_text->set_text(sout.str().c_str());	
-	
+	complete_runs_text->set_text(sout.str().c_str());
+
 	sout.str("");
-	
+
     switch(env->OutOfBoderTime()){
         case 0: sout << " ";
                 break;
@@ -252,24 +252,24 @@ void GUI::showScore(){
                 break;
         case 8: sout << "        Robot: T..e.. est..oy......perd..ie..ndo..";
                 break;
-        default: sout << "       Robot no disponible o fuera de cobertura";
+        default: sout << "       Robot no disponible o fuera de cobertura" ;
     }
 	robot_text->set_text(sout.str().c_str());
 }
 
 void GUI::doOneStep(){
-	if(current_time<life_time){		
+	if(current_time<life_time){
 		agent->Perceive(*env);
-		
+
 		action = agent->Think();
 		env->AcceptAction(action);
-		
+
 		++current_time;
 		if(current_time==life_time){
 			do_one_step_btn->disable();
 			display_btn->disable();
 			do_one_run_btn->disable();
-						
+
 			if(current_run<total_runs){
 				next_run_btn->enable();
 			}
@@ -282,11 +282,11 @@ void GUI::doOneStep(){
 
 void GUI::doOneRun(){
 	do_one_run_btn->disable();
-	
+
 	while(current_time<life_time){
 		doOneStep();
 	}
-	
+
 	if(current_run==total_runs){
 		do_all_run_btn->disable();
 	}
@@ -312,7 +312,7 @@ void GUI::nextRun(){
 
 void GUI::newGame(){
 	ifstream fin;
-	
+
 	delete env;
 	delete agent;
 
@@ -321,12 +321,12 @@ void GUI::newGame(){
 		current_time=0;
 		env=new Environment(fin);
 		agent=new Agent();
-		
+
 		do_one_step_btn->enable();
 		display_btn->enable();
 		do_one_run_btn->enable();
 		do_all_run_btn->enable();
-				
+
 		myGlutDisplay();
 		glutPostRedisplay();
 	}
@@ -338,13 +338,13 @@ void GUI::newGame(){
 			current_time=0;
 			env=new Environment(fin);
 			agent=new Agent();
-		
-			
+
+
 			do_one_step_btn->enable();
 			display_btn->enable();
 			do_one_run_btn->enable();
 			do_all_run_btn->enable();
-			
+
 			myGlutDisplay();
 			glutPostRedisplay();
 		}

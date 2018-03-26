@@ -73,7 +73,7 @@ Agent::ActionType Agent::Think()
 	}*/
 
 	//apartado c
-	if(BUMPER_){
+	if(BUMPER_ && !EMPUJAROBSTACULO_){
 		accion = Agent::actTURN_R;
 	}else{
 		if(CONTARTIRA_){
@@ -82,25 +82,21 @@ Agent::ActionType Agent::Think()
 			if(VOLVER_){
 				accion = volverObjeto();
 			}else{
-				//if(CARAACTUAL_ < 5){
-					if(CAMBIARCARA_ && !RECOLOCAR_ && !CAMBIARTIRA_){
-						accion = Agent::actFORWARD;
-						RECOLOCAR_ = true;
-					}else if(CAMBIARCARA_ && RECOLOCAR_ && !CAMBIARTIRA_){
-						accion = Agent::actTURN_L;
-						CAMBIARTIRA_ = true;
-					}else{
-						accion = Agent::actFORWARD;
-						CAMBIARTIRA_ = false;
-						RECOLOCAR_ = false;
-						CAMBIARCARA_ = false;
+				if(CARAACTUAL_ < 3){
+					if(CAMBIARCARA_ && RECOLOCAR_ && CAMBIARTIRA_){
 						CONTARTIRA_ = true;
 						ACTUAL_ = 0;
 						CARAACTUAL_++;
 					}
-				//}else{
+					accion = cambiarCara();
 
-				//}
+				}else{
+					if(!EMPUJAROBSTACULO_){
+						accion = recolocar();
+					}else{
+						accion = empujar();
+					}
+				}
 			}
 		}
 
@@ -111,6 +107,15 @@ Agent::ActionType Agent::Think()
 	return static_cast<ActionType> (accion);
 
 }
+Agent::ActionType Agent::empujar(){
+	int accion = 0;
+	if(CNY70_)
+		accion = Agent::actIDLE;
+	else
+		accion = Agent::actPUSH;
+	return static_cast<ActionType> (accion);
+}
+
 Agent::ActionType Agent::colocarEsquina(){
 	int accion = 0;
 	if(!CHOQUEPARED_){
@@ -133,6 +138,8 @@ Agent::ActionType Agent::colocarEsquina(){
 	return static_cast<ActionType> (accion);
 }
 
+
+
 Agent::ActionType Agent::contarTira(){
 	int accion = 0;
 	if(!CNY70_){
@@ -148,6 +155,8 @@ Agent::ActionType Agent::contarTira(){
 		if(ACTUAL_ < MINIMO_){
 			NUMCARAMINIMO_ = CARAACTUAL_;
 			MINIMO_ = ACTUAL_;
+			CARAFINAL_ = (NUMCARAMINIMO_ + 2)%4;
+			NUMCAMBIOSCARA_ = (CARAFINAL_ + 1)%4;
 		}
 
 		ACTUAL_--;
@@ -178,6 +187,27 @@ Agent::ActionType Agent::volverObjeto(){
 	}
 	return static_cast<ActionType> (accion);
 }
+int Agent::minimo(){
+	return NUMCAMBIOSCARA_;
+}
+Agent::ActionType Agent::recolocar(){
+	int accion = 0;
+	if( NUMCAMBIOSCARA_ > 0 ){
+		if(!CAMBIARCARA_ && !RECOLOCAR_ && !CAMBIARTIRA_){
+			CAMBIARCARA_ = true;
+		}
+		if(CAMBIARCARA_ && RECOLOCAR_ && CAMBIARTIRA_){
+			NUMCAMBIOSCARA_--;
+		}
+		accion = cambiarCara();
+
+	}else{
+		accion = Agent::actTURN_L;
+		EMPUJAROBSTACULO_ = true;
+	}
+	return static_cast<ActionType> (accion);
+}
+
 Agent::ActionType Agent::recorrerTira(){
 	int accion = 0;
 	if(!CNY70_){
@@ -195,10 +225,18 @@ Agent::ActionType Agent::recorrerTira(){
 
 Agent::ActionType Agent::cambiarCara(){
 	int accion = 0;
-
-	if(!RECOLOCAR_){
+	if(CAMBIARCARA_ && !RECOLOCAR_ && !CAMBIARTIRA_){
 		accion = Agent::actFORWARD;
 		RECOLOCAR_ = true;
+	}else if(CAMBIARCARA_ && RECOLOCAR_ && !CAMBIARTIRA_){
+		accion = Agent::actTURN_L;
+		CAMBIARTIRA_ = true;
+	}else{
+		accion = Agent::actFORWARD;
+		CAMBIARTIRA_ = false;
+		RECOLOCAR_ = false;
+		CAMBIARCARA_ = false;
+
 	}
 
 

@@ -30,7 +30,10 @@ public:
 		ACTUAL_ = 0;
 		CARAACTUAL_ = 0;
 		NUMCARAMINIMO_;
-
+		EMPUJAROBSTACULO_ = false;
+		RECOLOCARCARA_ = false;
+		CARAFINAL_;
+		NUMCAMBIOSCARA_;
 	}
 
 	enum ActionType
@@ -52,6 +55,9 @@ public:
 	ActionType volverObjeto();
 	ActionType rotar();
 	ActionType contarTira();
+	ActionType empujar();
+	ActionType recolocar();
+	int minimo();
 
 private:
 	bool CNY70_;
@@ -64,12 +70,16 @@ private:
 	bool CONTARTIRA_;
 	bool CAMBIARCARA_;
 	bool VOLVER_;
+	bool EMPUJAROBSTACULO_;
+	bool RECOLOCARCARA_;
 	int TAMANOLATERAL_;
 	int TAMANOTOTAL_;
 	int MINIMO_;
 	int ACTUAL_;
 	int CARAACTUAL_;
 	int NUMCARAMINIMO_;
+	int NUMCAMBIOSCARA_;
+	int CARAFINAL_;
 
 
 };
