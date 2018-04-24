@@ -47,10 +47,7 @@ estado rellenarEstado(int fila, int columna, int orientacion){
 
 	return e;
 }
-int modulo(int numero, int modulo){
-	numero += modulo;
-	return numero % modulo;
-}
+
 bool ComportamientoJugador::esCasillaValida(casillaMapa casilla){
 	bool estado = false;
 	int tamano = mapaResultado.size();
@@ -85,25 +82,23 @@ void ComportamientoJugador::construirPlan( const list<casillaMapa> &camino, list
 		else
 				orientacion = 1;
 
-		estado estadoSiguiente = estadoAnterior;
+		//Si el estado anterior es dinstino al de ahora hay que girar
+		if(estadoAnterior.orientacion != orientacion){
 
-		if(estadoSiguiente.orientacion != orientacion){
-
-			int destino = modulo(estadoSiguiente.orientacion + 1,4), contador;
+			int destino = (estadoAnterior.orientacion + 1) % 4;
 			if( destino == orientacion){
 				plan.push_back(actTURN_R);
-				estadoSiguiente.orientacion = estadoSiguiente.orientacion + 1;
+				estadoAnterior.orientacion = destino;
 			}else
-				while( orientacion != estadoSiguiente.orientacion ){
-					estadoSiguiente.orientacion = modulo(estadoSiguiente.orientacion-1,4);
+				while( orientacion != estadoAnterior.orientacion ){
+					estadoAnterior.orientacion = (estadoAnterior.orientacion + 3) % 4;
 					plan.push_back(actTURN_L);
 				}
 
 		}
-		estadoSiguiente = rellenarEstado(siguiente.fila, siguiente.columna, estadoSiguiente.orientacion);
+		estadoAnterior = rellenarEstado(siguiente.fila, siguiente.columna, estadoAnterior.orientacion);
 		plan.push_back(actFORWARD);
 
-		estadoAnterior = estadoSiguiente;
 		actual = siguiente;
 		++it;
 	}

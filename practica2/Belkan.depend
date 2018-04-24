@@ -3480,7 +3480,7 @@
 	"../Comportamientos_Jugador/aldeano.hpp"
 	"motorlib/util.h"
 
-1524488708 source:d:\ia\practica2\comportamientos_jugador\jugador.cpp
+1524596425 source:d:\ia\practica2\comportamientos_jugador\jugador.cpp
 	"../Comportamientos_Jugador/jugador.hpp"
 	"motorlib/util.h"
 	<iostream>
