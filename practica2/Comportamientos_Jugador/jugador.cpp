@@ -111,7 +111,14 @@ bool ComportamientoJugador::pathFinding(const estado &origen, const estado &dest
 	plan.clear();
 	int tamanoMapa = mapaResultado.size();
 	vector<vector<bool>> mapaCasillasVisitadas(tamanoMapa,vector<bool>(tamanoMapa, false));
+	int incrementosFila[4] = {-1,0,1,0};
+	int incrementosColumna[4] = {0,1,0,-1};
 
+	//mirar si hay un aldeano enfrente
+	if(aldeanoDelante){
+		mapaCasillasVisitadas[ origen.fila + incrementosFila[origen.orientacion] ][ origen.columna + incrementosColumna[origen.orientacion] ] = true;
+		aldeanoDelante = false;
+	}
 	//Creamos la cola para la busqueda en anchura
 	queue <list<casillaMapa>> casillasAVisitar;
 
@@ -126,8 +133,7 @@ bool ComportamientoJugador::pathFinding(const estado &origen, const estado &dest
 	casillasAVisitar.push(caminoInicial);
 	mapaCasillasVisitadas[origen.fila][origen.columna] = true;
 
-	int incrementosFila[4]={0,0,1,-1};
-	int incrementosColumna[4]={1,-1,0,0};
+
 	bool encontradoDestino = false;
 
 	while (!casillasAVisitar.empty() && !encontradoDestino){
@@ -195,6 +201,15 @@ Action ComportamientoJugador::think(Sensores sensores) {
 		hayPlan = false;
 	}
 
+	//mirar si hay aldeano delante
+	if (hayPlan && sensores.superficie[2] == 'a' && plan.front() == 0){
+		cout << "Tienes un aldenado enfrente\n";
+		hayPlan = false;
+		aldeanoDelante = true;
+	}
+
+
+
 	// Determinar si tengo que construir un plan
 	if (!hayPlan){
 		estado origen;
@@ -205,7 +220,7 @@ Action ComportamientoJugador::think(Sensores sensores) {
 		destino.fila = sensores.destinoF;
 		destino.columna = sensores.destinoC;
 
-    		hayPlan = pathFinding(origen,destino,plan);
+    hayPlan = pathFinding(origen,destino,plan);
 	}
 
 

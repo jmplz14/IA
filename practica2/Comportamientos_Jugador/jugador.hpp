@@ -25,6 +25,7 @@ class ComportamientoJugador : public Comportamiento {
       destino.orientacion = -1;
       ultimaAccion = actIDLE;
       hayPlan = false;
+      aldeanoDelante = false;
     }
     ComportamientoJugador(std::vector< std::vector< unsigned char> > mapaR) : Comportamiento(mapaR) {
       // Inicializar Variables de Estado
@@ -51,9 +52,10 @@ class ComportamientoJugador : public Comportamiento {
     estado destino;
     list<Action> plan;
 
+
     // Nuevas Variables de Estado
     Action ultimaAccion;
-    bool hayPlan;
+    bool hayPlan, aldeanoDelante;
 
 
 
