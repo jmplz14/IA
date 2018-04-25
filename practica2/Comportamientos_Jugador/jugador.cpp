@@ -7,6 +7,8 @@
 #include <queue>
 #include <vector>
 #include <cmath>
+#include <stdlib.h>
+#include <time.h>
 using namespace std;
 
 
@@ -58,6 +60,10 @@ bool ComportamientoJugador::esCasillaValida(casillaMapa casilla){
 		estado = terreno == 'S' || terreno == 'K' || terreno == 'T';
 	}
 	return estado;
+}
+
+bool ComportamientoJugador::esValidoAvanzar(char terreno, char aldeano){
+	return (terreno == 'S' || terreno == 'K' || terreno == 'T') && aldeano != 'a';
 }
 void ComportamientoJugador::construirPlan( const list<casillaMapa> &camino, list<Action> &plan, int orientacionInicial){
 	list<casillaMapa>::const_iterator it = camino.begin();
@@ -174,65 +180,103 @@ bool ComportamientoJugador::pathFinding(const estado &origen, const estado &dest
 }
 
 Action ComportamientoJugador::think(Sensores sensores) {
+
+	Action sigAccion;
+
   if (sensores.mensajeF != -1){
 		fil = sensores.mensajeF;
 		col = sensores.mensajeC;
+		recibidaLocalizacion = true;
+
 	}
 
-	// Actualizar el efecto de la ultima accion
-	switch (ultimaAccion){
-		case actTURN_R: brujula = (brujula+1)%4; break;
-		case actTURN_L: brujula = (brujula+3)%4; break;
-		case actFORWARD:
-			switch (brujula){
-				case 0: fil--; break;
-				case 1: col++; break;
-				case 2: fil++; break;
-				case 3: col--; break;
+	if(recibidaLocalizacion){
+		// Actualizar el efecto de la ultima accion
+		switch (ultimaAccion){
+			case actTURN_R: brujula = (brujula+1)%4; break;
+			case actTURN_L: brujula = (brujula+3)%4; break;
+			case actFORWARD:
+				switch (brujula){
+					case 0: fil--; break;
+					case 1: col++; break;
+					case 2: fil++; break;
+					case 3: col--; break;
+				}
+				cout << "fil: " << fil << "  col: " << col << " Or: " << brujula << endl;
+		}
+
+
+
+		// Determinar si ha cambiado el destino desde la ultima planificacion
+		if (hayPlan and (sensores.destinoF != destino.fila or sensores.destinoC != destino.columna)){
+			cout << "El destino ha cambiado\n";
+			hayPlan = false;
+		}
+
+		//mirar si hay aldeano delante
+		if (hayPlan && sensores.superficie[2] == 'a' && plan.front() == 0){
+			cout << "Tienes un aldenado enfrente\n";
+			hayPlan = false;
+			aldeanoDelante = true;
+		}
+
+
+
+		// Determinar si tengo que construir un plan
+		if (!hayPlan){
+			estado origen;
+			origen.fila = fil;
+			origen.columna = col;
+			origen.orientacion = brujula;
+
+			destino.fila = sensores.destinoF;
+			destino.columna = sensores.destinoC;
+
+	    hayPlan = pathFinding(origen,destino,plan);
+		}
+
+		// Ejecutar el planmapaConPlan
+
+		if (hayPlan and plan.size()>0){
+			sigAccion = plan.front();
+			plan.erase(plan.begin());
+		}
+		else {
+			sigAccion = actIDLE;
+		}
+
+	}else{
+
+		if(!encontradoPK){
+			if( esValidoAvanzar(sensores.terreno[2], sensores.superficie[2]) && numeroPasadasAleatorias < 10 ){
+				numeroPasadasAleatorias++;
+				int i = 1;
+				while (i < sensores.terreno.size() && !encontradoPK){
+					if(sensores.terreno[i] == 'K')
+						encontradoPK = true;
+						cout << sensores.terreno[i] << " ";
+					i++;
+				}
+				cout << endl;
+				if(!encontradoPK)
+					sigAccion = actFORWARD;
+				
+
+			}else{
+
+				int izquierda = rand() % 2;
+				numeroPasadasAleatorias = 0;
+				if(izquierda == 0)
+					sigAccion = actTURN_L;
+				else
+					sigAccion = actTURN_R;
+
 			}
-			cout << "fil: " << fil << "  col: " << col << " Or: " << brujula << endl;
+		}else
+			sigAccion = actIDLE;
 	}
 
 
-
-	// Determinar si ha cambiado el destino desde la ultima planificacion
-	if (hayPlan and (sensores.destinoF != destino.fila or sensores.destinoC != destino.columna)){
-		cout << "El destino ha cambiado\n";
-		hayPlan = false;
-	}
-
-	//mirar si hay aldeano delante
-	if (hayPlan && sensores.superficie[2] == 'a' && plan.front() == 0){
-		cout << "Tienes un aldenado enfrente\n";
-		hayPlan = false;
-		aldeanoDelante = true;
-	}
-
-
-
-	// Determinar si tengo que construir un plan
-	if (!hayPlan){
-		estado origen;
-		origen.fila = fil;
-		origen.columna = col;
-		origen.orientacion = brujula;
-
-		destino.fila = sensores.destinoF;
-		destino.columna = sensores.destinoC;
-
-    hayPlan = pathFinding(origen,destino,plan);
-	}
-
-
-	// Ejecutar el planmapaConPlan
-	Action sigAccion;
-	if (hayPlan and plan.size()>0){
-		sigAccion = plan.front();
-		plan.erase(plan.begin());
-	}
-	else {
-		sigAccion = actIDLE;
-	}
 
 	ultimaAccion = sigAccion;
 	return sigAccion;

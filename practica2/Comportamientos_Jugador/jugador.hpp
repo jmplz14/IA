@@ -2,7 +2,8 @@
 #define COMPORTAMIENTOJUGADOR_H
 
 #include "comportamientos/comportamiento.hpp"
-
+#include <stdlib.h>
+#include <time.h>
 #include <list>
 struct casillaMapa {
   int fila;
@@ -26,6 +27,11 @@ class ComportamientoJugador : public Comportamiento {
       ultimaAccion = actIDLE;
       hayPlan = false;
       aldeanoDelante = false;
+      recibidaLocalizacion = false;
+      numeroPasadasAleatorias = 0;
+      numeroPasadasAleatorias = 0;
+      encontradoPK = false;
+      srand (time(NULL));
     }
     ComportamientoJugador(std::vector< std::vector< unsigned char> > mapaR) : Comportamiento(mapaR) {
       // Inicializar Variables de Estado
@@ -37,6 +43,10 @@ class ComportamientoJugador : public Comportamiento {
       ultimaAccion = actIDLE;
       hayPlan = false;
       aldeanoDelante = false;
+      recibidaLocalizacion = false;
+      numeroPasadasAleatorias = 0;
+      encontradoPK = false;
+      srand (time(NULL));
     }
     ComportamientoJugador(const ComportamientoJugador & comport) : Comportamiento(comport){}
     ~ComportamientoJugador(){}
@@ -53,17 +63,18 @@ class ComportamientoJugador : public Comportamiento {
     estado destino;
     list<Action> plan;
 
-
     // Nuevas Variables de Estado
     Action ultimaAccion;
-    bool hayPlan, aldeanoDelante;
-
+    bool hayPlan, aldeanoDelante, recibidaLocalizacion, encontradoPK;
+    int numeroPasadasAleatorias;
 
 
     bool pathFinding(const estado &origen, const estado &destino, list<Action> &plan);
     void PintaPlan(list<Action> plan);
     bool esCasillaValida(casillaMapa casilla);
     void construirPlan(const list<casillaMapa> &camino, list<Action> &plan, int orientacionInicial);
+    bool esValidoAvanzar(char terreno, char aldeano);
+
 
 };
 
