@@ -54,16 +54,16 @@ bool ComportamientoJugador::esCasillaValida(casillaMapa casilla, const std::vect
 	bool estado = false;
 	int tamano = mapa.size();
 	char terreno;
-	bool dentro = casilla.fila >= 0 && casilla.columna < tamano && casilla.columna >= 0 && casilla.columna < tamano;
+	bool dentro = casilla.fila >= 0 && casilla.fila < tamano && casilla.columna >= 0 && casilla.columna < tamano;
 	if(dentro){
 		terreno = mapa[casilla.fila][casilla.columna];
-		estado = terreno == 'S' || terreno == 'K' || terreno == 'T';
+		estado = terreno == 'S' || terreno == 'K' || terreno == 'T' || terreno == '?';
 	}
 	return estado;
 }
 
 bool ComportamientoJugador::esValidoAvanzar(char terreno, char aldeano){
-	return (terreno == 'S' || terreno == 'K' || terreno == 'T') && aldeano != 'a';
+	return (terreno == 'S' || terreno == 'K' || terreno == 'T' ) && aldeano != 'a';
 }
 void ComportamientoJugador::construirPlan( const list<casillaMapa> &camino, list<Action> &plan, int orientacionInicial){
 	list<casillaMapa>::const_iterator it = camino.begin();
@@ -154,8 +154,9 @@ bool ComportamientoJugador::buscarCaminoAnchura(const estado &origen, const esta
 			for(int i = 0; i < 4; i++){
 				casillaSiguiente=rellenarCasillaMapa(ultimaCasilla.fila + incrementosFila[i],ultimaCasilla.columna + incrementosColumna[i]);
 
-				if(!mapaCasillasVisitadas[casillaSiguiente.fila][casillaSiguiente.columna])
-					if(esCasillaValida(casillaSiguiente,mapaResultado)){
+
+				if(esCasillaValida(casillaSiguiente,mapa))
+					if(!mapaCasillasVisitadas[casillaSiguiente.fila][casillaSiguiente.columna]){
 						mapaCasillasVisitadas[casillaSiguiente.fila][casillaSiguiente.columna] = true;
 						caminoActual.push_back(casillaSiguiente);
 						casillasAVisitar.push(caminoActual);
@@ -167,12 +168,10 @@ bool ComportamientoJugador::buscarCaminoAnchura(const estado &origen, const esta
 
 		}
 	}
-
 	if(encontradoDestino)
 		construirPlan(caminoActual,plan,origen.orientacion);
 
-
-
+	return encontradoDestino;
 }
 bool ComportamientoJugador::pathFinding(const estado &origen, const estado &destino, list<Action> &plan) {
 	bool encontradoDestino = buscarCaminoAnchura(origen, destino, plan, mapaResultado);
@@ -186,6 +185,7 @@ Action ComportamientoJugador::think(Sensores sensores) {
 	Action sigAccion;
 
   if (sensores.mensajeF != -1){
+		cout << "encontradooo";
 		fil = sensores.mensajeF;
 		col = sensores.mensajeC;
 		recibidaLocalizacion = true;
@@ -245,24 +245,9 @@ Action ComportamientoJugador::think(Sensores sensores) {
 	}else{
 
 		if(!encontradoPK){
-			if( esValidoAvanzar(sensores.terreno[2], sensores.superficie[2]) && numeroPasadasAleatorias < 10 ){
+			if( esValidoAvanzar(sensores.terreno[2], sensores.superficie[2]) && numeroPasadasAleatorias < (mapaResultado.size() / 10) ){
 				numeroPasadasAleatorias++;
-				int i = 1;
-				bool avistadoPK = false;
-				while (i < sensores.terreno.size() && !encontradoPK){
-					if(sensores.terreno[i] == 'K')
-						avistadoPK = true;
-
-					cout << sensores.terreno[i] << " ";
-					i++;
-				}
-				cout << endl;
-
-				if(avistadoPK)
-					encontradoPK = buscarCaminoPkSensores(sensores);
-				else
-					sigAccion = actFORWARD;
-
+				sigAccion = actFORWARD;
 
 			}else{
 
@@ -274,9 +259,21 @@ Action ComportamientoJugador::think(Sensores sensores) {
 					sigAccion = actTURN_R;
 
 			}
+			int i = 1;
+			bool avistadoPK = false;
+			while (i < sensores.terreno.size() && !encontradoPK){
+				if(sensores.terreno[i] == 'K')
+					avistadoPK = true;
+
+				i++;
+			}
+
+			if(avistadoPK)
+				encontradoPK = buscarCaminoPkSensores(sensores);
 		}
 
 		if (encontradoPK and plan.size()>0){
+
 			sigAccion = plan.front();
 			plan.erase(plan.begin());
 		}
@@ -302,30 +299,33 @@ bool ComportamientoJugador::buscarCaminoPkSensores(Sensores sensores){
 	bool encontradoDestino = true;
 	int filasMatriz = 3 , columnasMatriz = 7;
 	vector<vector<unsigned char>> matrizSensores(filasMatriz,vector<unsigned char>(columnasMatriz, 'X'));
-	casillaMapa origen,destino;
-	origen = rellenarCasillaMapa(0,3);
-	//mirar si hay un aldeano enfrente
+	estado origen,destino;
+
+	origen = rellenarEstado(2,3,0);
 
 	int  posicionVector = 1, elementosColumna = 3 ;
 	for (int i = 2; i >= 0; i-- ){
 		int total = i +  elementosColumna;
 		for(int j = i; j < total ; j++ ){
 			matrizSensores[i][j] = sensores.terreno[posicionVector];
-			if(sensores.terreno[posicionVector] == 'K')
-
-				destino = rellenarCasillaMapa(i,j);
+			if(sensores.terreno[posicionVector] == 'K'){
+				destino.fila = i;
+				destino.columna = j;
+			}
 			posicionVector++;
 		}
 		elementosColumna += 2;
-
 	}
-
 	for(int i = 0; i < filasMatriz; i++){
 		for(int j = 0; j < columnasMatriz; j++)
 			cout << matrizSensores[i][j] << " ";
 
 		cout << endl;
+
 	}
+	encontradoDestino = buscarCaminoAnchura(origen, destino, plan, matrizSensores);
+	plan.push_front(actFORWARD);
+	cout << plan.size();
 
 	return encontradoDestino;
 }
