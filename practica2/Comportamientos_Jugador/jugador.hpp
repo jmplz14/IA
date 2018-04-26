@@ -62,6 +62,7 @@ class ComportamientoJugador : public Comportamiento {
     int fil, col, brujula;
     estado destino;
     list<Action> plan;
+    list<Action> planPK;
 
     // Nuevas Variables de Estado
     Action ultimaAccion;
@@ -71,11 +72,11 @@ class ComportamientoJugador : public Comportamiento {
 
     bool pathFinding(const estado &origen, const estado &destino, list<Action> &plan);
     void PintaPlan(list<Action> plan);
-    bool esCasillaValida(casillaMapa casilla);
+    bool esCasillaValida(casillaMapa casilla, const std::vector< std::vector< unsigned char> > &mapa);
     void construirPlan(const list<casillaMapa> &camino, list<Action> &plan, int orientacionInicial);
     bool esValidoAvanzar(char terreno, char aldeano);
-
-
+    bool buscarCaminoPkSensores(Sensores sensores);
+    bool buscarCaminoAnchura(const estado &origen, const estado &destino, list<Action> &plan, const std::vector< std::vector< unsigned char> > &mapa);
 };
 
 #endif

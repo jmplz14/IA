@@ -50,13 +50,13 @@ estado rellenarEstado(int fila, int columna, int orientacion){
 	return e;
 }
 
-bool ComportamientoJugador::esCasillaValida(casillaMapa casilla){
+bool ComportamientoJugador::esCasillaValida(casillaMapa casilla, const std::vector< std::vector< unsigned char> > &mapa){
 	bool estado = false;
-	int tamano = mapaResultado.size();
+	int tamano = mapa.size();
 	char terreno;
 	bool dentro = casilla.fila >= 0 && casilla.columna < tamano && casilla.columna >= 0 && casilla.columna < tamano;
 	if(dentro){
-		terreno = mapaResultado[casilla.fila][casilla.columna];
+		terreno = mapa[casilla.fila][casilla.columna];
 		estado = terreno == 'S' || terreno == 'K' || terreno == 'T';
 	}
 	return estado;
@@ -111,11 +111,10 @@ void ComportamientoJugador::construirPlan( const list<casillaMapa> &camino, list
 
 
 }
-
-bool ComportamientoJugador::pathFinding(const estado &origen, const estado &destino, list<Action> &plan) {
+bool ComportamientoJugador::buscarCaminoAnchura(const estado &origen, const estado &destino, list<Action> &plan, const std::vector< std::vector< unsigned char> > &mapa){
 	//Borro la lista
 	plan.clear();
-	int tamanoMapa = mapaResultado.size();
+	int tamanoMapa = mapa.size();
 	vector<vector<bool>> mapaCasillasVisitadas(tamanoMapa,vector<bool>(tamanoMapa, false));
 	int incrementosFila[4] = {-1,0,1,0};
 	int incrementosColumna[4] = {0,1,0,-1};
@@ -156,7 +155,7 @@ bool ComportamientoJugador::pathFinding(const estado &origen, const estado &dest
 				casillaSiguiente=rellenarCasillaMapa(ultimaCasilla.fila + incrementosFila[i],ultimaCasilla.columna + incrementosColumna[i]);
 
 				if(!mapaCasillasVisitadas[casillaSiguiente.fila][casillaSiguiente.columna])
-					if(esCasillaValida(casillaSiguiente)){
+					if(esCasillaValida(casillaSiguiente,mapaResultado)){
 						mapaCasillasVisitadas[casillaSiguiente.fila][casillaSiguiente.columna] = true;
 						caminoActual.push_back(casillaSiguiente);
 						casillasAVisitar.push(caminoActual);
@@ -173,9 +172,12 @@ bool ComportamientoJugador::pathFinding(const estado &origen, const estado &dest
 		construirPlan(caminoActual,plan,origen.orientacion);
 
 
+
+}
+bool ComportamientoJugador::pathFinding(const estado &origen, const estado &destino, list<Action> &plan) {
+	bool encontradoDestino = buscarCaminoAnchura(origen, destino, plan, mapaResultado);
 	// Descomentar para ver el plan en el mapa
 	VisualizaPlan(origen, plan);
-
 	return encontradoDestino;
 }
 
@@ -189,23 +191,21 @@ Action ComportamientoJugador::think(Sensores sensores) {
 		recibidaLocalizacion = true;
 
 	}
+	// Actualizar el efecto de la ultima accion
+	switch (ultimaAccion){
+		case actTURN_R: brujula = (brujula+1)%4; break;
+		case actTURN_L: brujula = (brujula+3)%4; break;
+		case actFORWARD:
+			switch (brujula){
+				case 0: fil--; break;
+				case 1: col++; break;
+				case 2: fil++; break;
+				case 3: col--; break;
+			}
+			cout << "fil: " << fil << "  col: " << col << " Or: " << brujula << endl;
+	}
 
 	if(recibidaLocalizacion){
-		// Actualizar el efecto de la ultima accion
-		switch (ultimaAccion){
-			case actTURN_R: brujula = (brujula+1)%4; break;
-			case actTURN_L: brujula = (brujula+3)%4; break;
-			case actFORWARD:
-				switch (brujula){
-					case 0: fil--; break;
-					case 1: col++; break;
-					case 2: fil++; break;
-					case 3: col--; break;
-				}
-				cout << "fil: " << fil << "  col: " << col << " Or: " << brujula << endl;
-		}
-
-
 
 		// Determinar si ha cambiado el destino desde la ultima planificacion
 		if (hayPlan and (sensores.destinoF != destino.fila or sensores.destinoC != destino.columna)){
@@ -235,8 +235,6 @@ Action ComportamientoJugador::think(Sensores sensores) {
 	    hayPlan = pathFinding(origen,destino,plan);
 		}
 
-		// Ejecutar el planmapaConPlan
-
 		if (hayPlan and plan.size()>0){
 			sigAccion = plan.front();
 			plan.erase(plan.begin());
@@ -244,23 +242,27 @@ Action ComportamientoJugador::think(Sensores sensores) {
 		else {
 			sigAccion = actIDLE;
 		}
-
 	}else{
 
 		if(!encontradoPK){
 			if( esValidoAvanzar(sensores.terreno[2], sensores.superficie[2]) && numeroPasadasAleatorias < 10 ){
 				numeroPasadasAleatorias++;
 				int i = 1;
+				bool avistadoPK = false;
 				while (i < sensores.terreno.size() && !encontradoPK){
 					if(sensores.terreno[i] == 'K')
-						encontradoPK = true;
-						cout << sensores.terreno[i] << " ";
+						avistadoPK = true;
+
+					cout << sensores.terreno[i] << " ";
 					i++;
 				}
 				cout << endl;
-				if(!encontradoPK)
+
+				if(avistadoPK)
+					encontradoPK = buscarCaminoPkSensores(sensores);
+				else
 					sigAccion = actFORWARD;
-				
+
 
 			}else{
 
@@ -272,9 +274,15 @@ Action ComportamientoJugador::think(Sensores sensores) {
 					sigAccion = actTURN_R;
 
 			}
-		}else
-			sigAccion = actIDLE;
+		}
+
+		if (encontradoPK and plan.size()>0){
+			sigAccion = plan.front();
+			plan.erase(plan.begin());
+		}
+
 	}
+
 
 
 
@@ -290,7 +298,37 @@ void AnularMatriz(vector<vector<unsigned char> > &m){
 		}
 	}
 }
+bool ComportamientoJugador::buscarCaminoPkSensores(Sensores sensores){
+	bool encontradoDestino = true;
+	int filasMatriz = 3 , columnasMatriz = 7;
+	vector<vector<unsigned char>> matrizSensores(filasMatriz,vector<unsigned char>(columnasMatriz, 'X'));
+	casillaMapa origen,destino;
+	origen = rellenarCasillaMapa(0,3);
+	//mirar si hay un aldeano enfrente
 
+	int  posicionVector = 1, elementosColumna = 3 ;
+	for (int i = 2; i >= 0; i-- ){
+		int total = i +  elementosColumna;
+		for(int j = i; j < total ; j++ ){
+			matrizSensores[i][j] = sensores.terreno[posicionVector];
+			if(sensores.terreno[posicionVector] == 'K')
+
+				destino = rellenarCasillaMapa(i,j);
+			posicionVector++;
+		}
+		elementosColumna += 2;
+
+	}
+
+	for(int i = 0; i < filasMatriz; i++){
+		for(int j = 0; j < columnasMatriz; j++)
+			cout << matrizSensores[i][j] << " ";
+
+		cout << endl;
+	}
+
+	return encontradoDestino;
+}
 void ComportamientoJugador::VisualizaPlan(const estado &st, const list<Action> &plan){
   AnularMatriz(mapaConPlan);
 	estado cst = st;
