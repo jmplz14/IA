@@ -26,7 +26,7 @@ class ComportamientoJugador : public Comportamiento {
       destino.orientacion = -1;
       ultimaAccion = actIDLE;
       hayPlan = false;
-      aldeanoDelante = false;
+      obstaculoDelante = false;
       recibidaLocalizacion = false;
       numeroPasadasAleatorias = 0;
       numeroPasadasAleatorias = 0;
@@ -42,7 +42,7 @@ class ComportamientoJugador : public Comportamiento {
       destino.orientacion = -1;
       ultimaAccion = actIDLE;
       hayPlan = false;
-      aldeanoDelante = false;
+      obstaculoDelante = false;
       recibidaLocalizacion = false;
       numeroPasadasAleatorias = 0;
       encontradoPK = false;
@@ -66,7 +66,7 @@ class ComportamientoJugador : public Comportamiento {
 
     // Nuevas Variables de Estado
     Action ultimaAccion;
-    bool hayPlan, aldeanoDelante, recibidaLocalizacion, encontradoPK;
+    bool hayPlan, obstaculoDelante, recibidaLocalizacion, encontradoPK;
     int numeroPasadasAleatorias;
 
 

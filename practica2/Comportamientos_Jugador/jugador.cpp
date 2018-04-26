@@ -120,9 +120,9 @@ bool ComportamientoJugador::buscarCaminoAnchura(const estado &origen, const esta
 	int incrementosColumna[4] = {0,1,0,-1};
 
 	//mirar si hay un aldeano enfrente
-	if(aldeanoDelante){
+	if(obstaculoDelante){
 		mapaCasillasVisitadas[ origen.fila + incrementosFila[origen.orientacion] ][ origen.columna + incrementosColumna[origen.orientacion] ] = true;
-		aldeanoDelante = false;
+		obstaculoDelante = false;
 	}
 	//Creamos la cola para la busqueda en anchura
 	queue <list<casillaMapa>> casillasAVisitar;
@@ -185,12 +185,14 @@ Action ComportamientoJugador::think(Sensores sensores) {
 	Action sigAccion;
 
   if (sensores.mensajeF != -1){
-		cout << "encontradooo";
+		cout << "encontradooo " << fil << " " << col << endl ;
 		fil = sensores.mensajeF;
 		col = sensores.mensajeC;
+		cout << "encontradooo2 " << fil << " " << col << endl ;
+
 		recibidaLocalizacion = true;
 
-	}
+	}else{
 	// Actualizar el efecto de la ultima accion
 	switch (ultimaAccion){
 		case actTURN_R: brujula = (brujula+1)%4; break;
@@ -204,6 +206,8 @@ Action ComportamientoJugador::think(Sensores sensores) {
 			}
 			cout << "fil: " << fil << "  col: " << col << " Or: " << brujula << endl;
 	}
+	}
+	cout << "encontradooo2 " << fil << " " << col << endl ;
 
 	if(recibidaLocalizacion){
 
@@ -215,9 +219,9 @@ Action ComportamientoJugador::think(Sensores sensores) {
 
 		//mirar si hay aldeano delante
 		if (hayPlan && sensores.superficie[2] == 'a' && plan.front() == 0){
-			cout << "Tienes un aldenado enfrente\n";
+			cout << "obstaculo enfrente\n";
 			hayPlan = false;
-			aldeanoDelante = true;
+			obstaculoDelante = true;
 		}
 
 
@@ -271,9 +275,13 @@ Action ComportamientoJugador::think(Sensores sensores) {
 			if(avistadoPK)
 				encontradoPK = buscarCaminoPkSensores(sensores);
 		}
+		if (encontradoPK && sensores.superficie[2] == 'a' && plan.front() == 0){
+			cout << "Tienes un aldenado enfrente\n";
+			encontradoPK = false;
+			sigAccion = actIDLE;
+		}
 
 		if (encontradoPK and plan.size()>0){
-
 			sigAccion = plan.front();
 			plan.erase(plan.begin());
 		}
