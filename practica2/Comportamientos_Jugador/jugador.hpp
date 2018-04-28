@@ -76,6 +76,7 @@ class ComportamientoJugador : public Comportamiento {
     void construirPlan(const list<casillaMapa> &camino, list<Action> &plan, int orientacionInicial);
     bool esValidoAvanzar(char terreno, char aldeano);
     bool buscarCaminoPkSensores(Sensores sensores);
+    bool pintarSensores(Sensores sensores);
     bool buscarCaminoAnchura(const estado &origen, const estado &destino, list<Action> &plan, const std::vector< std::vector< unsigned char> > &mapa);
 };
 

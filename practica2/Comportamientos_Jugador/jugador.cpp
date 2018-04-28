@@ -188,28 +188,32 @@ Action ComportamientoJugador::think(Sensores sensores) {
 		cout << "encontradooo " << fil << " " << col << endl ;
 		fil = sensores.mensajeF;
 		col = sensores.mensajeC;
-		cout << "encontradooo2 " << fil << " " << col << endl ;
+		cout << "encontradooopk " << fil << " " << col << endl ;
 
 		recibidaLocalizacion = true;
 
 	}else{
-	// Actualizar el efecto de la ultima accion
-	switch (ultimaAccion){
-		case actTURN_R: brujula = (brujula+1)%4; break;
-		case actTURN_L: brujula = (brujula+3)%4; break;
-		case actFORWARD:
-			switch (brujula){
-				case 0: fil--; break;
-				case 1: col++; break;
-				case 2: fil++; break;
-				case 3: col--; break;
-			}
-			cout << "fil: " << fil << "  col: " << col << " Or: " << brujula << endl;
-	}
+		// Actualizar el efecto de la ultima accion
+		switch (ultimaAccion){
+			case actTURN_R: brujula = (brujula+1)%4; break;
+			case actTURN_L: brujula = (brujula+3)%4; break;
+			case actFORWARD:
+				switch (brujula){
+					case 0: fil--; break;
+					case 1: col++; break;
+					case 2: fil++; break;
+					case 3: col--; break;
+				}
+				cout << "fil: " << fil << "  col: " << col << " Or: " << brujula << endl;
+		}
 	}
 	cout << "encontradooo2 " << fil << " " << col << endl ;
 
 	if(recibidaLocalizacion){
+
+		cout << "Pintar en orientacion " << brujula;
+		if(encontradoPK)
+			pintarSensores(sensores);
 
 		// Determinar si ha cambiado el destino desde la ultima planificacion
 		if (hayPlan and (sensores.destinoF != destino.fila or sensores.destinoC != destino.columna)){
@@ -217,8 +221,9 @@ Action ComportamientoJugador::think(Sensores sensores) {
 			hayPlan = false;
 		}
 
-		//mirar si hay aldeano delante
-		if (hayPlan && sensores.superficie[2] == 'a' && plan.front() == 0){
+		//mirar si hay aldeano delante.
+
+		if (hayPlan && !esValidoAvanzar(sensores.terreno[2],sensores.superficie[2]) && plan.front() == 0){
 			cout << "obstaculo enfrente\n";
 			hayPlan = false;
 			obstaculoDelante = true;
@@ -294,6 +299,69 @@ Action ComportamientoJugador::think(Sensores sensores) {
 	ultimaAccion = sigAccion;
 	return sigAccion;
 }
+bool ComportamientoJugador::pintarSensores(Sensores sensores){
+	mapaResultado[fil][col] = sensores.terreno[0];
+	int numeroPasadas = 3, posicionVector = 1, nuevaFila = fil, nuevaColumna = col;
+	int tamanoMatriz = mapaResultado.size();
+	switch(brujula) {
+
+		case 0:
+			for(int i = 0; i < 3; i++){
+				nuevaFila--;
+				nuevaColumna--;
+				for(int j = 0; j < numeroPasadas; j++){
+					if(nuevaFila >= 0 && nuevaColumna >= 0 && nuevaFila < tamanoMatriz && nuevaColumna < tamanoMatriz )
+						mapaResultado[nuevaFila][nuevaColumna + j] = sensores.terreno[posicionVector];
+					posicionVector++;
+				}
+				numeroPasadas += 2;
+			}
+		break;
+		case 1:
+			for(int i = 0; i < 3; i++){
+				nuevaFila--;
+				nuevaColumna++;
+				for(int j = 0; j < numeroPasadas; j++){
+					if(nuevaFila >= 0 && nuevaColumna >= 0 && nuevaFila < tamanoMatriz && nuevaColumna < tamanoMatriz )
+						mapaResultado[nuevaFila + j][nuevaColumna] = sensores.terreno[posicionVector];
+					posicionVector++;
+				}
+				numeroPasadas += 2;
+			}
+		break;
+		case 2:
+			for(int i = 0; i < 3; i++){
+				nuevaFila++;
+				nuevaColumna++;
+				cout << endl;
+				for(int j = 0; j < numeroPasadas; j++){
+					cout << nuevaFila << ":" << nuevaColumna - j << ":" << sensores.terreno[posicionVector] << ":";
+					if(nuevaFila >= 0 && nuevaColumna >= 0 && nuevaFila < tamanoMatriz && nuevaColumna < tamanoMatriz ){
+						cout << "p ";
+						mapaResultado[nuevaFila][nuevaColumna - j] = (unsigned char)sensores.terreno[posicionVector];
+					}
+					posicionVector++;
+				}
+				cout << endl;
+				numeroPasadas += 2;
+			}
+		break;
+    default:
+			for(int i = 0; i < 3; i++){
+				nuevaFila++;
+				nuevaColumna--;
+				for(int j = 0; j < numeroPasadas; j++){
+					if(nuevaFila >= 0 && nuevaColumna >= 0 && nuevaFila < tamanoMatriz && nuevaColumna < tamanoMatriz )
+						mapaResultado[nuevaFila - j][nuevaColumna] = sensores.terreno[posicionVector];
+					posicionVector++;
+				}
+				numeroPasadas += 2;
+			}
+
+             break;
+}
+}
+
 
 
 void AnularMatriz(vector<vector<unsigned char> > &m){
