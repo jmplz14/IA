@@ -29,8 +29,8 @@ class ComportamientoJugador : public Comportamiento {
       obstaculoDelante = false;
       recibidaLocalizacion = false;
       numeroPasadasAleatorias = 0;
-      numeroPasadasAleatorias = 0;
       encontradoPK = false;
+      numeroPasadasMaximo = (mapaResultado.size() / 10);
       srand (time(NULL));
     }
     ComportamientoJugador(std::vector< std::vector< unsigned char> > mapaR) : Comportamiento(mapaR) {
@@ -46,6 +46,7 @@ class ComportamientoJugador : public Comportamiento {
       recibidaLocalizacion = false;
       numeroPasadasAleatorias = 0;
       encontradoPK = false;
+      numeroPasadasMaximo = (mapaResultado.size() / 10);
       srand (time(NULL));
     }
     ComportamientoJugador(const ComportamientoJugador & comport) : Comportamiento(comport){}
@@ -67,14 +68,14 @@ class ComportamientoJugador : public Comportamiento {
     // Nuevas Variables de Estado
     Action ultimaAccion;
     bool hayPlan, obstaculoDelante, recibidaLocalizacion, encontradoPK;
-    int numeroPasadasAleatorias;
+    int numeroPasadasAleatorias,numeroPasadasMaximo;
 
 
     bool pathFinding(const estado &origen, const estado &destino, list<Action> &plan);
     void PintaPlan(list<Action> plan);
     bool esCasillaValida(casillaMapa casilla, const std::vector< std::vector< unsigned char> > &mapa);
     void construirPlan(const list<casillaMapa> &camino, list<Action> &plan, int orientacionInicial);
-    bool esValidoAvanzar(char terreno, char aldeano);
+    bool esValidoAvanzar(unsigned char terreno, unsigned char aldeano);
     bool buscarCaminoPkSensores(Sensores sensores);
     bool pintarSensores(Sensores sensores);
     bool buscarCaminoAnchura(const estado &origen, const estado &destino, list<Action> &plan, const std::vector< std::vector< unsigned char> > &mapa);

@@ -3382,7 +3382,7 @@
 1521575058 d:\ia\practica2\include\comportamientos\comportamiento.hpp
 	<vector>
 
-1524926981 d:\ia\practica2\comportamientos_jugador\jugador.hpp
+1525029857 d:\ia\practica2\comportamientos_jugador\jugador.hpp
 	"comportamientos/comportamiento.hpp"
 	<stdlib.h>
 	<time.h>
@@ -3482,7 +3482,7 @@
 	"../Comportamientos_Jugador/aldeano.hpp"
 	"motorlib/util.h"
 
-1524937206 source:d:\ia\practica2\comportamientos_jugador\jugador.cpp
+1525029316 source:d:\ia\practica2\comportamientos_jugador\jugador.cpp
 	"../Comportamientos_Jugador/jugador.hpp"
 	"motorlib/util.h"
 	<iostream>
