@@ -81,27 +81,24 @@ int jmplz14::estadoMax(const GameState &state, int alfa, int beta, int profundid
 			else
 				valorHijo = estadoMax(hijo, alfa, beta, profundidad - 1);
 
-			if(valorHijo > valor)
-				valor = valorHijo;
+			if (valorHijo > alfa)
+				alfa = valorHijo;
 
-			if(valor >= beta)
-				return valor;
-
-			if(valor > alfa)
-			alfa = valor;
+			if(alfa >= beta)
+				return beta;
 
 
 		}
 	}
 
-	return valor;
+	return alfa;
 }
+
 int jmplz14::estadoMin(const GameState &state, int alfa, int beta, int profundidad){
 	if (state.isFinalState() && profundidad == 0)
 		return calcularValorEstado(state);
 
 	Player turno= state.getCurrentPlayer();
-	int valor = INT_MAX;
 	for (int i = 1; i<=6; i++){
 
 		if(state.getSeedsAt(turno, (Position) i) >0){
@@ -112,19 +109,17 @@ int jmplz14::estadoMin(const GameState &state, int alfa, int beta, int profundid
 			else
 				valorHijo = estadoMin(hijo, alfa, beta, profundidad - 1);
 
-			if(valorHijo < valor)
-				valor = valorHijo;
+			if(valorHijo > beta)
+				beta = valorHijo;
 
-			if(valor <= alfa)
-				return valor;
+			if( beta <= alfa )
+				return alfa;
 
-			if(valor > alfa)
-			beta = valor;
 
 		}
 	}
 
-	return valor;
+	return beta;
 }
 int jmplz14::calcularValorEstado(const GameState &state){
 	Player contrario = this->getPlayer() == J1 ? J2 : J1 ;
