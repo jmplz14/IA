@@ -41,7 +41,6 @@ Move jmplz14::bucarConAlfaBeta(const GameState &state){
 	Player turno= state.getCurrentPlayer();
 	int mejorValor = INT_MIN;
 	for (int i = 1; i<=6; i++){
-
 		if(state.getSeedsAt(turno, (Position) i) >0){
 			GameState hijo =  state.simulateMove( (Move) i);
 			int valorHijo;
@@ -55,7 +54,7 @@ Move jmplz14::bucarConAlfaBeta(const GameState &state){
 				mejorValor = valorHijo;
 				movimiento = (Move)i;
 			}
-
+			cerr << "movimiento: " << i << ":" << valorHijo << endl;
 
 		}
 	}
@@ -65,13 +64,12 @@ Move jmplz14::bucarConAlfaBeta(const GameState &state){
 }
 
 int jmplz14::estadoMax(const GameState &state, int alfa, int beta, int profundidad){
-	if (state.isFinalState() && profundidad == 0)
+	if (state.isFinalState() || profundidad == 0){
 		return calcularValorEstado(state);
-
+		cerr << "Valor: " << calcularValorEstado(state);
+	}
 	Player turno= state.getCurrentPlayer();
-	int valor = INT_MIN ;
 	for (int i = 1; i<=6; i++){
-
 		if(state.getSeedsAt(turno, (Position) i) >0){
 			GameState hijo =  state.simulateMove( (Move) i);
 			int valorHijo;
@@ -95,12 +93,12 @@ int jmplz14::estadoMax(const GameState &state, int alfa, int beta, int profundid
 }
 
 int jmplz14::estadoMin(const GameState &state, int alfa, int beta, int profundidad){
-	if (state.isFinalState() && profundidad == 0)
+	if (state.isFinalState() || profundidad == 0)
 		return calcularValorEstado(state);
 
 	Player turno= state.getCurrentPlayer();
 	for (int i = 1; i<=6; i++){
-
+		
 		if(state.getSeedsAt(turno, (Position) i) >0){
 			GameState hijo =  state.simulateMove( (Move) i);
 			int valorHijo;
@@ -109,7 +107,7 @@ int jmplz14::estadoMin(const GameState &state, int alfa, int beta, int profundid
 			else
 				valorHijo = estadoMin(hijo, alfa, beta, profundidad - 1);
 
-			if(valorHijo > beta)
+			if(valorHijo < beta)
 				beta = valorHijo;
 
 			if( beta <= alfa )
@@ -122,6 +120,11 @@ int jmplz14::estadoMin(const GameState &state, int alfa, int beta, int profundid
 	return beta;
 }
 int jmplz14::calcularValorEstado(const GameState &state){
-	Player contrario = this->getPlayer() == J1 ? J2 : J1 ;
+	Player contrario; //= this->getPlayer() == J1 ? J2 : J1 ;
+	if (this->getPlayer() == J1 )
+		contrario = J2;
+	else
+		contrario = J1;
+	//cerr << "no soy jugador " << contrario << endl ;
 	return state.getScore(this->getPlayer()) - state.getScore(contrario);
 }
