@@ -4,7 +4,7 @@
 #include <iostream>
 
 // MODIFICAR: Hacer el include del fichero que contiene al Bot del alumno. Ejemplo
-#include "asdfg.h"
+#include "jmplz14v1.h"
 
 
 using namespace std;
@@ -17,7 +17,7 @@ int main() {
 
 
 	// MODIFICAR: Declarar aquí el bot del alumno. Ejemplo:
-	asdfg *rb= new asdfg();
+	jmplz14v1 *rb= new jmplz14v1();
 
 	// MODIFICAR: Asignar el bot del alumno a la variable bot. Ejemplo:
 	bot= (Bot *) rb;

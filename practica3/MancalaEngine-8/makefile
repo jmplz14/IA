@@ -1,7 +1,7 @@
 
 all:
-	g++ -oasdfg *.cpp -I./ -lm -std=c++11
+	g++ -ojmplz14v1 *.cpp -I./ -lm -std=c++11
 
 
 clean:
-	rm asdfg
+	rm jmplz14v1
