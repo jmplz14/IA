@@ -145,6 +145,7 @@ int jmplz14::calcularValorEstado(const GameState &state){
 			h2++;
 		i++;
 	}
+	h2 *= pesos[2];
 	//Numero de semillas actual
 	h3 = state.getScore(actual) * pesos[3];
 	//casillero con semillas mas a la derecha
