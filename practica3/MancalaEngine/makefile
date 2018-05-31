@@ -4,5 +4,4 @@ all:
 
 
 clean:
-	rm AlumnoBot
-
+	rm jmplz14

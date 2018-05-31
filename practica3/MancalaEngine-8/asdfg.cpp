@@ -1,11 +1,11 @@
 /*
- * jmplz14.cpp
+ * asdfg.cpp
  *
  *  Created on: 15 ene. 2018
  *      Author: manupc
  */
 
-#include "jmplz14.h"
+#include "asdfg.h"
 
 #include <string>
 #include <cstdlib>
@@ -13,30 +13,30 @@
 #include <iostream>
 using namespace std;
 
-jmplz14::jmplz14() {
+asdfg::asdfg() {
 	// Inicializar las variables necesarias para ejecutar la partida
 
 }
 
-jmplz14::~jmplz14() {
+asdfg::~asdfg() {
 	// Liberar los recursos reservados (memoria, ficheros, etc.)
 }
 
-void jmplz14::initialize() {
+void asdfg::initialize() {
 	// Inicializar el bot antes de jugar una partida
 }
 
-string jmplz14::getName() {
-	return "jmplz14"; // Sustituir por el nombre del bot
+string asdfg::getName() {
+	return "asdfg"; // Sustituir por el nombre del bot
 }
 
-Move jmplz14::nextMove(const vector<Move> &adversary, const GameState &state) {
+Move asdfg::nextMove(const vector<Move> &adversary, const GameState &state) {
 
 	Move movimiento= bucarConAlfaBeta(state);
 
 	return movimiento;
 }
-Move jmplz14::bucarConAlfaBeta(const GameState &state){
+Move asdfg::bucarConAlfaBeta(const GameState &state){
 	Move movimiento= M_NONE;
 	Player turno= state.getCurrentPlayer();
 	int mejorValor = INT_MIN;
@@ -63,7 +63,7 @@ Move jmplz14::bucarConAlfaBeta(const GameState &state){
 	return movimiento;
 }
 
-int jmplz14::estadoMax(const GameState &state, int alfa, int beta, int profundidad){
+int asdfg::estadoMax(const GameState &state, int alfa, int beta, int profundidad){
 	if (state.isFinalState() || profundidad == 0){
 		return calcularValorEstado(state);
 		cerr << "Valor: " << calcularValorEstado(state);
@@ -92,13 +92,13 @@ int jmplz14::estadoMax(const GameState &state, int alfa, int beta, int profundid
 	return alfa;
 }
 
-int jmplz14::estadoMin(const GameState &state, int alfa, int beta, int profundidad){
+int asdfg::estadoMin(const GameState &state, int alfa, int beta, int profundidad){
 	if (state.isFinalState() || profundidad == 0)
 		return calcularValorEstado(state);
 
 	Player turno= state.getCurrentPlayer();
 	for (int i = 1; i<=6; i++){
-		
+
 		if(state.getSeedsAt(turno, (Position) i) >0){
 			GameState hijo =  state.simulateMove( (Move) i);
 			int valorHijo;
@@ -119,12 +119,12 @@ int jmplz14::estadoMin(const GameState &state, int alfa, int beta, int profundid
 
 	return beta;
 }
-int jmplz14::calcularValorEstado(const GameState &state){
+int asdfg::calcularValorEstado(const GameState &state){
 	Player contrario; //= this->getPlayer() == J1 ? J2 : J1 ;
 	if (this->getPlayer() == J1 )
 		contrario = J2;
 	else
 		contrario = J1;
 	//cerr << "no soy jugador " << contrario << endl ;
-	return state.getScore(this->getPlayer()) - state.getScore(contrario);
+	return state.getScore(this->getPlayer()) == J2 && state.getScore(this->getPlayer()) > 23 ? state.getScore(this->getPlayer()) - state.getScore(contrario) + 5: state.getScore(this->getPlayer()) - state.getScore(contrario);
 }

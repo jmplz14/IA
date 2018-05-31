@@ -1,5 +1,5 @@
 /*
- * jmplz14.h
+ * asdfg.h
  *
  *  Created on: 15 ene. 2018
  *      Author: manupc
@@ -10,10 +10,10 @@
 #ifndef MANUPCBOT_H_
 #define MANUPCBOT_H_
 
-class jmplz14:Bot {
+class asdfg:Bot {
 public:
-	jmplz14();
-	~jmplz14();
+	asdfg();
+	~asdfg();
 
 
 	void initialize();
