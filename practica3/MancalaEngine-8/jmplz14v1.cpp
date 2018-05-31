@@ -126,5 +126,5 @@ int jmplz14v1::calcularValorEstado(const GameState &state){
 	else
 		contrario = J1;
 	//cerr << "no soy jugador " << contrario << endl ;
-	return state.getScore(this->getPlayer()) == J2 && state.getScore(this->getPlayer()) > 23 ? state.getScore(this->getPlayer()) - state.getScore(contrario) + 5: state.getScore(this->getPlayer()) - state.getScore(contrario);
+	return state.getScore(this->getPlayer()) - state.getScore(contrario);
 }

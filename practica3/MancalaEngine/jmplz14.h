@@ -24,7 +24,8 @@ private:
 	Move bucarConAlfaBeta(const GameState &state);
 	int estadoMax(const GameState &state, int alfa, int beta, int profundidad);
 	int estadoMin(const GameState &state, int alfa, int beta, int profundidad);
-	int calcularValorEstado(const GameState &state);
+	int calcularValorEstadoJ1(const GameState &state);
+	int calcularValorEstadoJ2(const GameState &state);
 };
 
 #endif /* MANUPCBOT_H_ */
