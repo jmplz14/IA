@@ -125,7 +125,7 @@ int jmplz14::estadoMin(const GameState &state, int alfa, int beta, int profundid
 }
 int jmplz14::calcularValorEstado(const GameState &state){
 	Player contrario, actual; //= this->getPlayer() == J1 ? J2 : J1 ;
-	int h0,h1,h2,h3,h4,h5;
+	int h0,h1,h2,h3,h4,h5, i = 1;
 	actual = this->getPlayer();
 	if (actual == J1 )
 		contrario = J2;
@@ -138,16 +138,23 @@ int jmplz14::calcularValorEstado(const GameState &state){
 	state.getSeedsAt(actual, (Position) 4) + state.getSeedsAt(actual, (Position) 3) + \
 	state.getSeedsAt(actual, (Position) 2) + state.getSeedsAt(actual, (Position) 1);
 	h1 *= pesos[1];
+	//Numero de movimientos posibles
+	h2 = 0;
+	while(i <= 6){
+		if( state.getSeedsAt(actual, (Position) i) > 0)
+			h2++;
+		i++;
+	}
 	//Numero de semillas actual
 	h3 = state.getScore(actual) * pesos[3];
 	//casillero con semillas mas a la derecha
-	int i = 1;
+	i = 1;
 	while(i < 6 && state.getSeedsAt(actual, (Position) i) > 0)
 		i++;
 	h4 = state.getSeedsAt(actual, (Position) i) * pesos[4];
 
 	//puntos del enemigo
 	h5 = state.getScore(contrario) * pesos[5];
-	//cerr << "no soy jugador " << contrario << endl ;
+
 	return h0+h1+h3+h4+h5;
 }
