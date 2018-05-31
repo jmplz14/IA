@@ -156,5 +156,5 @@ int jmplz14::calcularValorEstado(const GameState &state){
 	//puntos del enemigo
 	h5 = state.getScore(contrario) * pesos[5];
 
-	return h0+h1+h3+h4+h5;
+	return h0+h1+h2+h3+h4+h5;
 }
