@@ -22,10 +22,10 @@ public:
 private:
 	double pesos[6];
 	Move buscarConAlfaBeta(const GameState &state, int niveles);
-	double estadoMax(const GameState &state, double alfa, double beta, int profundidad);
-	double estadoMin(const GameState &state, double alfa, double beta, int profundidad);
+	double estadoMax(const GameState &state, double alfa, double beta, int profundidad, const GameState &padre, int num_hijo);
+	double estadoMin(const GameState &state, double alfa, double beta, int profundidad, const GameState &padre, int num_hijo);
 	int calcularValorEstadoJ1(const GameState &state);
-	double calcularValorEstadoJ2(const GameState &state);
+	double calcularValorEstadoJ2(const GameState &state,const GameState &padre, int num_hijo);
 };
 
 #endif /* MANUPCBOT_H_ */

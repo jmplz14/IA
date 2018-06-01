@@ -56,9 +56,9 @@ Move jmplz14::buscarConAlfaBeta(const GameState &state,int niveles){
 			double valorHijo;
 
 			if(turno != hijo.getCurrentPlayer())
-				valorHijo = estadoMin(hijo, INT_MIN, INT_MAX, niveles);
+				valorHijo = estadoMin(hijo, INT_MIN, INT_MAX, niveles, state, i);
 			else
-				valorHijo = estadoMax(hijo, INT_MIN, INT_MAX, niveles);
+				valorHijo = estadoMax(hijo, INT_MIN, INT_MAX, niveles, state, i);
 
 			if(valorHijo > mejorValor){
 				mejorValor = valorHijo;
@@ -73,12 +73,12 @@ Move jmplz14::buscarConAlfaBeta(const GameState &state,int niveles){
 	return movimiento;
 }
 
-double jmplz14::estadoMax(const GameState &state, double alfa, double beta, int profundidad){
+double jmplz14::estadoMax(const GameState &state, double alfa, double beta, int profundidad, const GameState &padre, int num_hijo){
 	if ( (state.isFinalState() || profundidad == 0) && this->getPlayer() == J1)
 		return calcularValorEstadoJ1(state);
 
 	if ( (state.isFinalState() || profundidad == 0) && this->getPlayer() == J2)
-			return calcularValorEstadoJ2(state);
+			return calcularValorEstadoJ2(state,padre,num_hijo);
 	Player turno= state.getCurrentPlayer();
 	for (int i = 1; i<=6; i++){
 		if(state.getSeedsAt(turno, (Position) i) >0){
@@ -86,9 +86,9 @@ double jmplz14::estadoMax(const GameState &state, double alfa, double beta, int 
 			double valorHijo;
 
 			if(turno != hijo.getCurrentPlayer())
-				valorHijo = estadoMin(hijo, alfa, beta, profundidad - 1);
+				valorHijo = estadoMin(hijo, alfa, beta, profundidad - 1, state, i);
 			else
-				valorHijo = estadoMax(hijo, alfa, beta, profundidad - 1);
+				valorHijo = estadoMax(hijo, alfa, beta, profundidad - 1, state, i);
 
 			if (valorHijo > alfa)
 				alfa = valorHijo;
@@ -103,12 +103,12 @@ double jmplz14::estadoMax(const GameState &state, double alfa, double beta, int 
 	return alfa;
 }
 
-double jmplz14::estadoMin(const GameState &state, double alfa, double beta, int profundidad){
+double jmplz14::estadoMin(const GameState &state, double alfa, double beta, int profundidad, const GameState &padre, int num_hijo){
 	if ( (state.isFinalState() || profundidad == 0) && this->getPlayer() == J1)
 		return calcularValorEstadoJ1(state);
 
 	if ( (state.isFinalState() || profundidad == 0) && this->getPlayer() == J2)
-			return calcularValorEstadoJ2(state);
+			return calcularValorEstadoJ2(state,padre,num_hijo);
 
 	Player turno= state.getCurrentPlayer();
 	for (int i = 1; i<=6; i++){
@@ -117,9 +117,9 @@ double jmplz14::estadoMin(const GameState &state, double alfa, double beta, int 
 			GameState hijo =  state.simulateMove( (Move) i);
 			double valorHijo;
 			if(turno != hijo.getCurrentPlayer())
-				valorHijo = estadoMax(hijo, alfa, beta, profundidad - 1);
+				valorHijo = estadoMax(hijo, alfa, beta, profundidad - 1, state, i);
 			else
-				valorHijo = estadoMin(hijo, alfa, beta, profundidad - 1);
+				valorHijo = estadoMin(hijo, alfa, beta, profundidad - 1, state, i);
 
 			if(valorHijo < beta)
 				beta = valorHijo;
@@ -133,7 +133,8 @@ double jmplz14::estadoMin(const GameState &state, double alfa, double beta, int 
 
 	return beta;
 }
-double jmplz14::calcularValorEstadoJ2(const GameState &state){
+
+double jmplz14::calcularValorEstadoJ2(const GameState &state, const GameState &padre, int num_hijo){
 	Player contrario, actual; //= this->getPlayer() == J1 ? J2 : J1 ;
 	double h0,h1,h2,h3,h4,h5, i = 1;
 	actual = this->getPlayer();
@@ -159,15 +160,17 @@ double jmplz14::calcularValorEstadoJ2(const GameState &state){
 	//Numero de semillas actual
 	h3 = state.getScore(actual) * pesos[3];
 	//casillero con semillas mas a la derecha
-	/*i = 1;
-	while(i < 6 && state.getSeedsAt(actual, (Position) i) > 0)
+	h4 = 0;
+	i = 1;
+	while(i <= 6 && padre.getSeedsAt(actual, (Position) i) > 0)
 		i++;
-	h4 = state.getSeedsAt(actual, (Position) i) * pesos[4];*/
+	if(i == num_hijo)
+		h4 = 1 * pesos[4];
 
 	//puntos del enemigo
 	h5 = state.getScore(contrario) * pesos[5];
 
-	return h0+h1+h2+h3-h5;
+	return h0+h1+h2+h3+h4-h5;
 }
 int jmplz14::calcularValorEstadoJ1(const GameState &state){
 	Player contrario; //= this->getPlayer() == J1 ? J2 : J1 ;
