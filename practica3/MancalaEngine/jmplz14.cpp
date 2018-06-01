@@ -11,6 +11,7 @@
 #include <cstdlib>
 #include <climits>
 #include <iostream>
+#include <map>
 using namespace std;
 
 jmplz14::jmplz14(){
@@ -36,11 +37,16 @@ string jmplz14::getName() {
 
 Move jmplz14::nextMove(const vector<Move> &adversary, const GameState &state) {
 
-	Move movimiento= bucarConAlfaBeta(state);
+	Move movimiento;
+	if (this->getPlayer() == J1 )
+		movimiento = buscarConAlfaBeta(state,10);
+	else
+		movimiento = buscarConAlfaBeta(state,9);
 
 	return movimiento;
 }
-Move jmplz14::bucarConAlfaBeta(const GameState &state){
+
+Move jmplz14::buscarConAlfaBeta(const GameState &state,int niveles){
 	Move movimiento= M_NONE;
 	Player turno= state.getCurrentPlayer();
 	int mejorValor = INT_MIN;
@@ -50,9 +56,9 @@ Move jmplz14::bucarConAlfaBeta(const GameState &state){
 			int valorHijo;
 
 			if(turno != hijo.getCurrentPlayer())
-				valorHijo = estadoMin(hijo, INT_MIN, INT_MAX, 9);
+				valorHijo = estadoMin(hijo, INT_MIN, INT_MAX, niveles);
 			else
-				valorHijo = estadoMax(hijo, INT_MIN, INT_MAX, 9);
+				valorHijo = estadoMax(hijo, INT_MIN, INT_MAX, niveles);
 
 			if(valorHijo > mejorValor){
 				mejorValor = valorHijo;

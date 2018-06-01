@@ -21,7 +21,7 @@ public:
 	Move nextMove(const vector<Move> &adversary, const GameState &state);
 private:
 	double pesos[6];
-	Move bucarConAlfaBeta(const GameState &state);
+	Move buscarConAlfaBeta(const GameState &state, int niveles);
 	int estadoMax(const GameState &state, int alfa, int beta, int profundidad);
 	int estadoMin(const GameState &state, int alfa, int beta, int profundidad);
 	int calcularValorEstadoJ1(const GameState &state);
