@@ -49,11 +49,11 @@ Move jmplz14::nextMove(const vector<Move> &adversary, const GameState &state) {
 Move jmplz14::buscarConAlfaBeta(const GameState &state,int niveles){
 	Move movimiento= M_NONE;
 	Player turno= state.getCurrentPlayer();
-	double mejorValor = INT_MIN;
+	int mejorValor = INT_MIN;
 	for (int i = 1; i<=6; i++){
 		if(state.getSeedsAt(turno, (Position) i) >0){
 			GameState hijo =  state.simulateMove( (Move) i);
-			double valorHijo;
+			int valorHijo;
 
 			if(turno != hijo.getCurrentPlayer())
 				valorHijo = estadoMin(hijo, INT_MIN, INT_MAX, niveles);
@@ -73,7 +73,7 @@ Move jmplz14::buscarConAlfaBeta(const GameState &state,int niveles){
 	return movimiento;
 }
 
-double jmplz14::estadoMax(const GameState &state, double alfa, double beta, int profundidad){
+int jmplz14::estadoMax(const GameState &state, int alfa, int beta, int profundidad){
 	if ( (state.isFinalState() || profundidad == 0) && this->getPlayer() == J1)
 		return calcularValorEstadoJ1(state);
 
@@ -83,7 +83,7 @@ double jmplz14::estadoMax(const GameState &state, double alfa, double beta, int 
 	for (int i = 1; i<=6; i++){
 		if(state.getSeedsAt(turno, (Position) i) >0){
 			GameState hijo =  state.simulateMove( (Move) i);
-			double valorHijo;
+			int valorHijo;
 
 			if(turno != hijo.getCurrentPlayer())
 				valorHijo = estadoMin(hijo, alfa, beta, profundidad - 1);
@@ -103,7 +103,7 @@ double jmplz14::estadoMax(const GameState &state, double alfa, double beta, int 
 	return alfa;
 }
 
-double jmplz14::estadoMin(const GameState &state, double alfa, double beta, int profundidad){
+int jmplz14::estadoMin(const GameState &state, int alfa, int beta, int profundidad){
 	if ( (state.isFinalState() || profundidad == 0) && this->getPlayer() == J1)
 		return calcularValorEstadoJ1(state);
 
@@ -115,7 +115,7 @@ double jmplz14::estadoMin(const GameState &state, double alfa, double beta, int 
 
 		if(state.getSeedsAt(turno, (Position) i) >0){
 			GameState hijo =  state.simulateMove( (Move) i);
-			double valorHijo;
+			int valorHijo;
 			if(turno != hijo.getCurrentPlayer())
 				valorHijo = estadoMax(hijo, alfa, beta, profundidad - 1);
 			else
@@ -133,9 +133,9 @@ double jmplz14::estadoMin(const GameState &state, double alfa, double beta, int 
 
 	return beta;
 }
-double jmplz14::calcularValorEstadoJ2(const GameState &state){
+int jmplz14::calcularValorEstadoJ2(const GameState &state){
 	Player contrario, actual; //= this->getPlayer() == J1 ? J2 : J1 ;
-	double h0,h1,h2,h3,h4,h5, i = 1;
+	int h0,h1,h2,h3,h4,h5, i = 1;
 	actual = this->getPlayer();
 	if (actual == J1 )
 		contrario = J2;
