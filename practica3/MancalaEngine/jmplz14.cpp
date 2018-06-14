@@ -41,7 +41,7 @@ Move jmplz14::nextMove(const vector<Move> &adversary, const GameState &state) {
 	if (this->getPlayer() == J1 )
 		movimiento = buscarConAlfaBeta(state,10);
 	else
-		movimiento = buscarConAlfaBeta(state,9);
+		movimiento = buscarConAlfaBeta(state,10);
 
 	return movimiento;
 }
