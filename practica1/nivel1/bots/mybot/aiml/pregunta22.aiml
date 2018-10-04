@@ -5,7 +5,7 @@ encoding="UTF-8"?>
 <category>
   <pattern>^ puntuacion ^ practica 1 * defender ^ nivel 3 ^ no lo supero ^</pattern>
   <template>
-    optas a un 6
+    Como mucho podras tener un 6
   </template>
 </category>
 

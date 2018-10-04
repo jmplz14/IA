@@ -5,7 +5,7 @@ encoding="UTF-8"?>
 <category>
   <pattern>^ consiste * examen de ejercicios ^</pattern>
   <template>
-    en hacer ejercicios
+    En hacer ejercicios como los que hemos visto en clase
   </template>
 </category>
 
